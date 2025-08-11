@@ -1,0 +1,16 @@
+.contenedor-tablero {
+    display: grid;
+    grid-template-columns: repeat(3, calc(9rem + 2px));
+    grid-template-rows: repeat(3, calc(9rem + 2px));
+}
+
+.contenedor-bloque {
+    display: grid;
+    grid-template-columns: repeat(3, 3rem);
+    grid-template-rows: repeat(3, 3rem);
+    place-items: center;
+    /* Bordes */
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
