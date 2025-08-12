@@ -1,8 +1,10 @@
 import { useRef, useState } from 'react';
 import './Box.css'
+import { valorValido } from '../../utils/validacion';
 
-function Box({ tableroActualBox, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado, setBoxSeleccionado }) {
+function Box({ tableroActualBox, tableroActual, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado, setBoxSeleccionado }) {
     const [valor, setValor] = useState(tableroActualBox)
+    const [valido, setValido] = useState(true);
     const inicial = useRef(tableroActualBox ? true : false);
     
     function handleClick() {
@@ -23,9 +25,18 @@ function Box({ tableroActualBox, setTableroActual, tableroInicial, filaBloqueInd
         if (!inicial.current) {
             if (esNumero) {
                 setValor(+e.key);
+                setTableroActual(prev => {
+                    prev[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] = +e.key;
+                    return prev;
+                })
+                
+                
             } else if (esDelete || esBackspace) {
                 setValor("");
-            }
+                setTableroActual(prev => {
+                    prev[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] = 0;
+                    return prev;
+                })            }
         }
     }
 
@@ -75,7 +86,9 @@ function Box({ tableroActualBox, setTableroActual, tableroInicial, filaBloqueInd
             ${itemSeleccionado()&&'box-seleccionado'} 
             ${areaSeleccionada()&&'area-seleccionada'}
             ${inicial.current&&'texto-original'}
-            ${valorSeleccionado()&&'numero-seleccionado'}`
+            ${valorSeleccionado()&&'numero-seleccionado'}
+            ${!valorValido(tableroActual, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, valor)&&'numero-invalido'}`
+            
         }
         onClick={handleClick} 
         onKeyDown={handleKeyDown} 

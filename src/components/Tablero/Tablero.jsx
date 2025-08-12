@@ -9,7 +9,7 @@ function Tablero({ tableroActual, setTableroActual, tableroInicial, boxSeleccion
                     filaBloque.map((tableroActualBloque, colBloqueIndex) => (
                         <Bloque 
                         key={`${filaBloqueIndex}-${colBloqueIndex}`} 
-                        tableroActualBloque={tableroActualBloque} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
+                        tableroActualBloque={tableroActualBloque} tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
                         filaBloqueIndex={filaBloqueIndex} colBloqueIndex={colBloqueIndex} 
                         boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado}
                         />

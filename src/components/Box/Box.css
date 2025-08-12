@@ -45,3 +45,7 @@
 .box-seleccionado {
     background-color: rgba(69, 220, 209, 0.866);
 }
+
+.numero-invalido {
+    color: red;
+}
