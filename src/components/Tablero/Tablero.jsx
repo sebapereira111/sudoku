@@ -1,7 +1,7 @@
 import './Tablero.css'
 import Bloque from '../Bloque/Bloque.jsx'
 
-function Tablero({ tableroActual }) {
+function Tablero({ tableroActual, boxSeleccionado, setBoxSeleccionado }) {
     return (
         <>
             <div className='contenedor-tablero'>
@@ -9,7 +9,9 @@ function Tablero({ tableroActual }) {
                     filaBloque.map((tableroBloque, colBloqueIndex) => (
                         <Bloque key={`${filaBloqueIndex}-${colBloqueIndex}`} 
                         tableroBloque={tableroBloque} 
-                        filaBloqueIndex={filaBloqueIndex} colBloqueIndex={colBloqueIndex} />
+                        filaBloqueIndex={filaBloqueIndex} colBloqueIndex={colBloqueIndex} 
+                        boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado}
+                        />
                     ))
                 ))}
             </div>

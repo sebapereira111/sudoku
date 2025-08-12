@@ -5,7 +5,7 @@ import Box from '../Box/Box.jsx'
 // fila y columna del bloque, y fila y columna del box
 
 
-function Bloque({ tableroBloque, filaBloqueIndex, colBloqueIndex }) {
+function Bloque({ tableroBloque, filaBloqueIndex, colBloqueIndex, boxSeleccionado, setBoxSeleccionado }) {
     return (
         <>
             <div className='contenedor-bloque'>
@@ -14,7 +14,9 @@ function Bloque({ tableroBloque, filaBloqueIndex, colBloqueIndex }) {
                         <Box key={`${filaBoxIndex}-${colBoxIndex}`} 
                         tableroBox={tableroBox} 
                         filaBloqueIndex={filaBloqueIndex} colBloqueIndex={colBloqueIndex} 
-                        filaBoxIndex={filaBoxIndex} colBoxIndex={colBoxIndex} />
+                        filaBoxIndex={filaBoxIndex} colBoxIndex={colBoxIndex} 
+                        boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado} 
+                        />
                     ))
                 ))}
             </div>

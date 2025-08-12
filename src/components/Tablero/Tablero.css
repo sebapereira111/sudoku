@@ -1,7 +1,9 @@
 .contenedor-tablero {
     /* Se crea un grid 3x3 para ubicar los bloques */
     /* Las dimensiones son auto para que se ajusten al contenido */
-    display: grid;
+    display: inline-grid;
+    display: -ms-inline-grid;
+    display: -moz-inline-grid;
     grid-template-columns: repeat(3, auto);
     grid-template-rows: repeat(3, auto);
     /* Bordes */

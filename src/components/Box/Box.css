@@ -15,4 +15,23 @@
     border-style: dotted;
     border-color: black;
     border-width: 0.5px;
+    /* Para cambiar el cursor */
+    cursor: grab;
+    /* Para que no se selecione el texto al hacer click */
+    -webkit-user-select: none; /* Chrome, Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+.box:active {
+    cursor: grabbing;
+}
+
+.box-seleccionado {
+    background-color: rgba(60, 209, 199, 0.917);
+}
+
+.area-seleccionada {
+    background-color: rgba(105, 232, 223, 0.456);
 }
