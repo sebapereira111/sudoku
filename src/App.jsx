@@ -4,7 +4,7 @@ import Tablero from './components/Tablero/Tablero.jsx';
 import { test, validTest} from './constants/tableros.js';
 
 function App() {
-    const tableroInicial = test;
+    const tableroInicial = validTest;
     const [tableroActual, setTableroActual] = useState(tableroInicial);
     const [boxSeleccionado, setBoxSeleccionado] = useState({
         filaBloqueIndex: 1,

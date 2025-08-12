@@ -13,8 +13,6 @@ function Box({ tableroActualBox, setTableroActual, tableroInicial, filaBloqueInd
             colBoxIndex: colBoxIndex,
             valor: valor
         });
-        console.log(valor);
-        console.log(boxSeleccionado.valor);
     }
 
     function handleKeyDown(e) {
