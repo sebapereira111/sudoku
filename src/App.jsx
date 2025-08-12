@@ -1,12 +1,16 @@
-import { useState } from 'react'
-import './App.css'
-import Tablero from './components/Tablero/Tablero';
+import { useState } from 'react';
+import './App.css';
+import Tablero from './components/Tablero/Tablero.jsx';
+import { test, validTest} from './constants/tableros.js';
 
 function App() {
-    const [tableroActual, setTableroActual] = useState();
+    const [tableroActual, setTableroActual] = useState(test);
+
 
     return (
-        <Tablero />
+        <>
+            <Tablero tableroActual={tableroActual} />
+        </>
     )
 }
 

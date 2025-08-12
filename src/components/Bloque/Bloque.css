@@ -1,13 +1,12 @@
-.contenedor-tablero {
-    /* Se crea un grid 3x3 para ubicar los bloques */
+.contenedor-bloque {
+    /* Se crea un grid 3x3 para ubicar los box */
     /* Las dimensiones son auto para que se ajusten al contenido */
     display: grid;
     grid-template-columns: repeat(3, auto);
     grid-template-rows: repeat(3, auto);
     /* Bordes */
-    /* Los bordes son para resaltar el tablero */
+    /* Los bordes son para resaltar los bloques */
     border-style: solid;
     border-color: black;
-    border-width: 4px;
+    border-width: 1px;
 }
-
