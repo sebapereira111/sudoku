@@ -22,16 +22,26 @@
     -moz-user-select: none;    /* Firefox */
     -ms-user-select: none;     /* Internet Explorer/Edge */
     user-select: none;
+    /* Para que al recibir foco no aparezca el borde */
+    outline: none;
 }
 
 .box:active {
     cursor: grabbing;
 }
 
-.box-seleccionado {
-    background-color: rgba(60, 209, 199, 0.917);
+.texto-original {
+    color: black;
 }
 
 .area-seleccionada {
-    background-color: rgba(105, 232, 223, 0.456);
+    background-color: rgba(105, 232, 224, 0.28);
+}
+
+.numero-seleccionado {
+    background-color: rgba(33, 173, 164, 0.448);
+}
+
+.box-seleccionado {
+    background-color: rgba(69, 220, 209, 0.866);
 }

@@ -4,19 +4,22 @@ import Tablero from './components/Tablero/Tablero.jsx';
 import { test, validTest} from './constants/tableros.js';
 
 function App() {
-    const [tableroActual, setTableroActual] = useState(test);
+    const tableroInicial = test;
+    const [tableroActual, setTableroActual] = useState(tableroInicial);
     const [boxSeleccionado, setBoxSeleccionado] = useState({
         filaBloqueIndex: 1,
         colBloqueIndex: 1,
         filaBoxIndex: 1,
-        colBoxIndex: 1
+        colBoxIndex: 1,
+        valor: tableroInicial[1][1][1][1]
     });
 
     
 
     return (
         <>
-            <Tablero tableroActual={tableroActual} 
+            <Tablero 
+            tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
             boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado} />
         </>
     )

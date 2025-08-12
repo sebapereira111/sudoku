@@ -1,13 +1,34 @@
+import { useRef, useState } from 'react';
 import './Box.css'
 
-function Box({ tableroBox, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado, setBoxSeleccionado }) {
+function Box({ tableroActualBox, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado, setBoxSeleccionado }) {
+    const [valor, setValor] = useState(tableroActualBox)
+    const inicial = useRef(tableroActualBox ? true : false);
+    
     function handleClick() {
         setBoxSeleccionado({
             filaBloqueIndex: filaBloqueIndex,
             colBloqueIndex: colBloqueIndex,
             filaBoxIndex: filaBoxIndex,
-            colBoxIndex: colBoxIndex
+            colBoxIndex: colBoxIndex,
+            valor: valor
         });
+        console.log(valor);
+        console.log(boxSeleccionado.valor);
+    }
+
+    function handleKeyDown(e) {
+        const esNumero = /^[1-9]$/.test(e.key);
+        const esDelete = e.key === 'Delete';
+        const esBackspace = e.key === 'Backspace';
+
+        if (!inicial.current) {
+            if (esNumero) {
+                setValor(+e.key);
+            } else if (esDelete || esBackspace) {
+                setValor("");
+            }
+        }
     }
 
     function areaSeleccionada() {
@@ -44,10 +65,24 @@ function Box({ tableroBox, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBox
         }
         return false
     }
+
+    function valorSeleccionado() {
+        if (valor && (valor == boxSeleccionado.valor)) {
+            return true
+        }
+    }
     
     return (
-        <div className={itemSeleccionado() ? 'box box-seleccionado' : areaSeleccionada() ? 'box area-seleccionada' : 'box'} onClick={handleClick} >
-            {tableroBox ? tableroBox : ""}
+        <div className={`box 
+            ${itemSeleccionado()&&'box-seleccionado'} 
+            ${areaSeleccionada()&&'area-seleccionada'}
+            ${inicial.current&&'texto-original'}
+            ${valorSeleccionado()&&'numero-seleccionado'}`
+        }
+        onClick={handleClick} 
+        onKeyDown={handleKeyDown} 
+        tabIndex={0} >
+                {valor ? valor : ""}
         </div>
     )
 }
