@@ -5,15 +5,15 @@ import Box from '../Box/Box.jsx'
 // fila y columna del bloque, y fila y columna del box
 
 
-function Bloque({ tableroActualBloque, tableroActual, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, boxSeleccionado, setBoxSeleccionado }) {
+function Bloque({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, boxSeleccionado, setBoxSeleccionado }) {
     return (
         <>
             <div className='contenedor-bloque'>
-                {tableroActualBloque.map((filaBox, filaBoxIndex) => (
-                    filaBox.map((tableroActualBox, colBoxIndex) => (
+                {tableroActual[filaBloqueIndex][colBloqueIndex].map((filaBox, filaBoxIndex) => (
+                    filaBox.map((_, colBoxIndex) => (
                         <Box 
                         key={`${filaBoxIndex}-${colBoxIndex}`} 
-                        tableroActualBox={tableroActualBox} tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
+                        tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
                         filaBloqueIndex={filaBloqueIndex} colBloqueIndex={colBloqueIndex} 
                         filaBoxIndex={filaBoxIndex} colBoxIndex={colBoxIndex} 
                         boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado} 

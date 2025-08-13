@@ -1,99 +1,67 @@
 import { useRef, useState } from 'react';
 import './Box.css'
-import { valorValido } from '../../utils/validacion';
+import { classSelector } from '../../utils/boxColors';
 
-function Box({ tableroActualBox, tableroActual, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado, setBoxSeleccionado }) {
-    const [valor, setValor] = useState(tableroActualBox)
-    const [valido, setValido] = useState(true);
-    const inicial = useRef(tableroActualBox ? true : false);
+function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado, setBoxSeleccionado }) {
     
+    // Se encarga de actualizar cual es el box seleccionado
     function handleClick() {
-        setBoxSeleccionado({
-            filaBloqueIndex: filaBloqueIndex,
-            colBloqueIndex: colBloqueIndex,
-            filaBoxIndex: filaBoxIndex,
-            colBoxIndex: colBoxIndex,
-            valor: valor
+        setBoxSeleccionado((prev) => {
+            const newArr = structuredClone(prev);
+            newArr.filaBloqueIndex = filaBloqueIndex;
+            newArr.colBloqueIndex = colBloqueIndex;
+            newArr.filaBoxIndex = filaBoxIndex;
+            newArr.colBoxIndex = colBoxIndex;
+            newArr.valor = tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex];
+            return newArr
         });
     }
 
+    // Se encaraga de actualizar el valor en el box seleccionado (con foco)
+    // Primero filtra solo los valores validos y actualiza el tablero actual correspondientemente
+    // Luego actualiza el valor de box seleccionado
     function handleKeyDown(e) {
         const esNumero = /^[1-9]$/.test(e.key);
+        const esCero = e.key === '0';
         const esDelete = e.key === 'Delete';
         const esBackspace = e.key === 'Backspace';
 
-        if (!inicial.current) {
+        if (!tableroInicial[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex]) {
             if (esNumero) {
-                setValor(+e.key);
-                setTableroActual(prev => {
-                    prev[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] = +e.key;
-                    return prev;
-                })
-                
-                
-            } else if (esDelete || esBackspace) {
-                setValor("");
-                setTableroActual(prev => {
-                    prev[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] = 0;
-                    return prev;
-                })            }
-        }
-    }
-
-    function areaSeleccionada() {
-        /* Para cambiar el color de fondo del bloque seleccionado */
-        if (filaBloqueIndex == boxSeleccionado.filaBloqueIndex) {
-            if (colBloqueIndex == boxSeleccionado.colBloqueIndex) {
-                return true
+                setTableroActual((prev => {
+                    const newArr = structuredClone(prev);
+                    newArr[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] = +e.key;
+                    return newArr
+                }));
+            } else if (esDelete || esBackspace || esCero) {
+                setTableroActual((prev => {
+                    const newArr = structuredClone(prev);
+                    newArr[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] = 0;
+                    return newArr
+                }));         
             }
-        }
-        /* Para cambiar el color de fondo de la fila seleccionada */
-        if (filaBloqueIndex == boxSeleccionado.filaBloqueIndex) {
-            if (filaBoxIndex == boxSeleccionado.filaBoxIndex) {
-                return true
-            }
-        }
-        /* Para cambiar el color de fondo de la columna seleccionada */
-        if (colBloqueIndex == boxSeleccionado.colBloqueIndex) {
-            if (colBoxIndex == boxSeleccionado.colBoxIndex) {
-                return true
-            }
-        }
-        return false
-    }
-
-    function itemSeleccionado() {
-        if (filaBloqueIndex == boxSeleccionado.filaBloqueIndex) {
-            if (colBloqueIndex == boxSeleccionado.colBloqueIndex) {
-                if (filaBoxIndex == boxSeleccionado.filaBoxIndex) {
-                    if (colBoxIndex == boxSeleccionado.colBoxIndex) {
-                        return true
-                    }
+            setBoxSeleccionado((prev) => {
+                const newArr = structuredClone(prev);
+                newArr.filaBloqueIndex = filaBloqueIndex;
+                newArr.colBloqueIndex = colBloqueIndex;
+                newArr.filaBoxIndex = filaBoxIndex;
+                newArr.colBoxIndex = colBoxIndex;
+                if (esNumero) {
+                    newArr.valor = +e.key;
+                } else if (esDelete || esBackspace) {
+                    newArr.valor = 0;
                 }
-            }
-        }
-        return false
-    }
-
-    function valorSeleccionado() {
-        if (valor && (valor == boxSeleccionado.valor)) {
-            return true
+                return newArr
+            });
         }
     }
     
     return (
-        <div className={`box 
-            ${itemSeleccionado()&&'box-seleccionado'} 
-            ${areaSeleccionada()&&'area-seleccionada'}
-            ${inicial.current&&'texto-original'}
-            ${valorSeleccionado()&&'numero-seleccionado'}
-            ${!valorValido(tableroActual, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, valor)&&'numero-invalido'}`
-            
-        }
+        <div className={classSelector(tableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado)} 
         onClick={handleClick} 
         onKeyDown={handleKeyDown} 
         tabIndex={0} >
-                {valor ? valor : ""}
+                {tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] ? tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] : ""}
         </div>
     )
 }

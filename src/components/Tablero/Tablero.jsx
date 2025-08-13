@@ -6,10 +6,10 @@ function Tablero({ tableroActual, setTableroActual, tableroInicial, boxSeleccion
         <>
             <div className='contenedor-tablero'>
                 {tableroActual.map((filaBloque, filaBloqueIndex) => (
-                    filaBloque.map((tableroActualBloque, colBloqueIndex) => (
+                    filaBloque.map((_, colBloqueIndex) => (
                         <Bloque 
                         key={`${filaBloqueIndex}-${colBloqueIndex}`} 
-                        tableroActualBloque={tableroActualBloque} tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
+                        tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
                         filaBloqueIndex={filaBloqueIndex} colBloqueIndex={colBloqueIndex} 
                         boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado}
                         />

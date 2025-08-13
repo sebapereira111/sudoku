@@ -8,9 +8,6 @@
     /* Texto */
     font-size: 2.5rem;
     line-height: 3rem;
-    color: blue;
-    /* Fondo */
-    background-color: white;
     /* Bordes */
     border-style: dotted;
     border-color: black;
@@ -30,9 +27,46 @@
     cursor: grabbing;
 }
 
-.texto-original {
+.texto-negro {
     color: black;
 }
+
+.texto-azul {
+    color: rgb(83, 83, 223);
+}
+
+.fondo-general {
+    background-color: white;
+}
+
+.fondo-seleccionado {
+    background-color: rgba(31, 173, 163, 0.9);
+}
+
+.fondo-invalido {
+    background-color: rgba(255, 0, 0, 0.369);
+}
+
+.fondo-bloque {
+    background-color: rgba(31, 173, 163, 0.25);
+}
+
+.fondo-fila {
+    background-color: rgba(31, 173, 163, 0.25);
+}
+
+.fondo-columna {
+    background-color: rgba(31, 173, 163, 0.25);
+}
+
+.fondo-numero {
+    background-color: rgba(33, 173, 164, 0.5);
+}
+
+
+
+
+
 
 .area-seleccionada {
     background-color: rgba(105, 232, 224, 0.28);
