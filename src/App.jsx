@@ -10,8 +10,7 @@ function App() {
         filaBloqueIndex: 1,
         colBloqueIndex: 1,
         filaBoxIndex: 1,
-        colBoxIndex: 1,
-        valor: tableroInicial[1][1][1][1]
+        colBoxIndex: 1
     });
 
     

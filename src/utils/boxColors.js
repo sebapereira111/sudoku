@@ -30,7 +30,7 @@ const classSelector = function(tableroActual, tableroInicial, filaBloqueIndex, c
     } else if (columnaSeleccionada(colBloqueIndex, colBoxIndex, boxSeleccionado)) {
         // Fondo para columna seleccionada
         clase.push('fondo-columna');
-    } else if (tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] == boxSeleccionado.valor) {
+    } else if (tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] == tableroActual[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex]) {
         // Fondo para numero seleccionado
         clase.push('fondo-numero');
     } else {

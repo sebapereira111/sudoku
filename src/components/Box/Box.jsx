@@ -12,7 +12,6 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
             newArr.colBloqueIndex = colBloqueIndex;
             newArr.filaBoxIndex = filaBoxIndex;
             newArr.colBoxIndex = colBoxIndex;
-            newArr.valor = tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex];
             return newArr
         });
     }
@@ -40,19 +39,6 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
                     return newArr
                 }));         
             }
-            setBoxSeleccionado((prev) => {
-                const newArr = structuredClone(prev);
-                newArr.filaBloqueIndex = filaBloqueIndex;
-                newArr.colBloqueIndex = colBloqueIndex;
-                newArr.filaBoxIndex = filaBoxIndex;
-                newArr.colBoxIndex = colBoxIndex;
-                if (esNumero) {
-                    newArr.valor = +e.key;
-                } else if (esDelete || esBackspace) {
-                    newArr.valor = 0;
-                }
-                return newArr
-            });
         }
     }
     
