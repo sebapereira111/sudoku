@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react';
 import './Box.css'
 import { classSelector } from '../../utils/boxColors';
 
 function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado, setBoxSeleccionado }) {
-    
+    const valor = tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex];
+
     // Se encarga de actualizar cual es el box seleccionado
     function handleClick() {
         setBoxSeleccionado((prev) => {
@@ -47,7 +47,7 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
         onClick={handleClick} 
         onKeyDown={handleKeyDown} 
         tabIndex={0} >
-                {tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] ? tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] : ""}
+                {valor ? valor : ""}
         </div>
     )
 }
