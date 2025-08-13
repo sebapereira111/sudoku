@@ -2,12 +2,13 @@
     /* Disposicion */
     display: inline-block;
     /* Dimensiones */
-    box-sizing: border-box;
+    box-sizing: content-box;
     height: 3rem;
     width: 3rem;
     /* Texto */
     font-size: 2.5rem;
     line-height: 3rem;
+    text-align: center;
     /* Bordes */
     border-style: dotted;
     border-color: black;
@@ -27,6 +28,10 @@
     cursor: grabbing;
 }
 
+.box:focus {  
+    background-color: rgba(31, 173, 163, 1);
+}
+
 .texto-negro {
     color: black;
 }
@@ -40,7 +45,7 @@
 }
 
 .fondo-seleccionado {
-    background-color: rgba(31, 173, 163, 0.9);
+    background-color: rgba(31, 173, 163, 0.5);
 }
 
 .fondo-invalido {
@@ -63,23 +68,13 @@
     background-color: rgba(33, 173, 164, 0.5);
 }
 
-
-
-
-
-
-.area-seleccionada {
-    background-color: rgba(105, 232, 224, 0.28);
-}
-
-.numero-seleccionado {
-    background-color: rgba(33, 173, 164, 0.448);
-}
-
-.box-seleccionado {
-    background-color: rgba(69, 220, 209, 0.866);
-}
-
-.numero-invalido {
-    color: red;
+.box-apuntes {
+    /* Se crea un grid 3x3 para ubicar los apuntes */
+    display: grid;
+    grid-template-columns: repeat(3, 1rem);
+    grid-template-rows: repeat(3, 1rem);
+    /* Texto */
+    font-size: 0.75rem;
+    line-height: 1rem;
+    text-align: center;
 }

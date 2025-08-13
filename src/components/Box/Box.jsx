@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import './Box.css'
 import { classSelector } from '../../utils/boxColors';
 
-function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado, setBoxSeleccionado }) {
+function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado, setBoxSeleccionado, apuntesActivados }) {
+    const [apuntes, setApuntes] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    // El valor del box, solo para no tener que esctibir todo cada vez
     const valor = tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex];
 
     // Se encarga de actualizar cual es el box seleccionado
@@ -25,21 +28,52 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
         const esDelete = e.key === 'Delete';
         const esBackspace = e.key === 'Backspace';
 
-        if (!tableroInicial[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex]) {
-            if (esNumero) {
-                setTableroActual((prev => {
-                    const newArr = structuredClone(prev);
-                    newArr[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] = +e.key;
-                    return newArr
-                }));
-            } else if (esDelete || esBackspace || esCero) {
-                setTableroActual((prev => {
-                    const newArr = structuredClone(prev);
-                    newArr[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex] = 0;
-                    return newArr
-                }));         
-            }
+        if (tableroInicial[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex]) {
+            return
         }
+
+        if (apuntesActivados && !valor) {
+            if (esNumero) {
+                if (+e.key == apuntes[+e.key - 1]) {
+                    setApuntes((prev) => {
+                        const newArr = structuredClone(prev);
+                        newArr[+e.key - 1] = 0;
+                        return newArr;
+                    });
+                } else {
+                    setApuntes((prev) => {
+                        const newArr = structuredClone(prev);
+                        newArr[+e.key - 1] = +e.key;
+                        return newArr;
+                    });
+                }
+            }
+            return
+        }
+
+        
+        if (esNumero) {
+            setTableroActual((prev => {
+                const newArr = structuredClone(prev);
+                newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = +e.key;
+                return newArr
+            }));
+        } else if (esDelete || esBackspace || esCero) {
+            setTableroActual((prev => {
+                const newArr = structuredClone(prev);
+                newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
+                return newArr
+            }));         
+        }
+        
+    }
+
+    function mostrarApuntes() {
+        return (
+            <div className='box-apuntes'>
+                {apuntes.map((item, index) => <span key={index} >{item ? item : " "}</span>)}
+            </div>
+        )
     }
     
     return (
@@ -47,7 +81,7 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
         onClick={handleClick} 
         onKeyDown={handleKeyDown} 
         tabIndex={0} >
-                {valor ? valor : ""}
+            {valor ? valor : mostrarApuntes()}
         </div>
     )
 }

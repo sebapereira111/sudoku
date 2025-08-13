@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Tablero from './components/Tablero/Tablero.jsx';
+import Controles from './components/controles/controles.jsx';
 import { test, validTest} from './constants/tableros.js';
 
 function App() {
@@ -12,14 +13,17 @@ function App() {
         filaBoxIndex: 1,
         colBoxIndex: 1
     });
-
-    
+    const [apuntesActivados, setApuntesActivados] = useState(false);
 
     return (
         <>
             <Tablero 
             tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
-            boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado} />
+            boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado} 
+            apuntesActivados={apuntesActivados} />
+            <Controles setTableroActual={setTableroActual} tableroInicial={tableroInicial} 
+            boxSeleccionado={boxSeleccionado} 
+            apuntesActivados={apuntesActivados} setApuntesActivados={setApuntesActivados} />
         </>
     )
 }
