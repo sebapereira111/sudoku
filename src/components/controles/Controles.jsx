@@ -5,10 +5,12 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesA
 
 
     function handleReiniciar(e) {
+        e.stopPropagation();
         e.preventDefault();
     }
 
     function handleBorrar(e) {
+        e.stopPropagation();
         e.preventDefault();
         if (!valorSeleccionado) {
             setTableroActual((prev => {
@@ -20,6 +22,7 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesA
     }
 
     function handleApuntes(e) {
+        e.stopPropagation();
         e.preventDefault();
         if(apuntesActivados) {
             setApuntesActivados(false);

@@ -8,7 +8,8 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
     const valor = tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex];
 
     // Se encarga de actualizar cual es el box seleccionado
-    function handleClick() {
+    function handleClick(e) {
+        e.stopPropagation();
         setBoxSeleccionado((prev) => {
             const newArr = structuredClone(prev);
             newArr.filaBloqueIndex = filaBloqueIndex;
@@ -32,7 +33,18 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
             return
         }
 
-        if (apuntesActivados && !valor) {
+        if (esDelete || esBackspace || esCero) {
+            setTableroActual((prev => {
+                const newArr = structuredClone(prev);
+                newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
+                return newArr
+            }));         
+        }
+
+        if (apuntesActivados) {
+            if (valor) {
+                return
+            }
             if (esNumero) {
                 if (+e.key == apuntes[+e.key - 1]) {
                     setApuntes((prev) => {
@@ -51,21 +63,13 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
             return
         }
 
-        
         if (esNumero) {
             setTableroActual((prev => {
                 const newArr = structuredClone(prev);
                 newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = +e.key;
                 return newArr
             }));
-        } else if (esDelete || esBackspace || esCero) {
-            setTableroActual((prev => {
-                const newArr = structuredClone(prev);
-                newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
-                return newArr
-            }));         
         }
-        
     }
 
     function mostrarApuntes() {
@@ -78,7 +82,7 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
     
     return (
         <div className={classSelector(tableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado)} 
-        onClick={handleClick} 
+        onMouseDown={handleClick} 
         onKeyDown={handleKeyDown} 
         tabIndex={0} >
             {valor ? valor : mostrarApuntes()}

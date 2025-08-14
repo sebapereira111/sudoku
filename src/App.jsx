@@ -15,15 +15,22 @@ function App() {
     });
     const [apuntesActivados, setApuntesActivados] = useState(false);
 
+    function handelMouseDown(e) {
+        e.preventDefault();
+        console.log(document.activeElement); // Devuelve el nodo DOM con foco
+    }
+
     return (
         <>
-            <Tablero 
-            tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
-            boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado} 
-            apuntesActivados={apuntesActivados} />
-            <Controles setTableroActual={setTableroActual} tableroInicial={tableroInicial} 
-            boxSeleccionado={boxSeleccionado} 
-            apuntesActivados={apuntesActivados} setApuntesActivados={setApuntesActivados} />
+            <div className='fondo' onMouseDown={handelMouseDown} >
+                <Tablero 
+                tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
+                boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado} 
+                apuntesActivados={apuntesActivados} />
+                <Controles setTableroActual={setTableroActual} tableroInicial={tableroInicial} 
+                boxSeleccionado={boxSeleccionado} 
+                apuntesActivados={apuntesActivados} setApuntesActivados={setApuntesActivados} />
+            </div>
         </>
     )
 }
