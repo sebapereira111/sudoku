@@ -3,7 +3,6 @@ import './Controles.css'
 function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesActivados, setApuntesActivados }) {
     const valorSeleccionado = tableroInicial[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex];
 
-
     function handleReiniciar(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -35,12 +34,14 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesA
         <>
             <div className='contenedor-controles'>
                 <div className='contenedor-utilidades'>
-                    <button id='reiniciar' className='boton-controles' onMouseDown={handleReiniciar}>↻</button>
-                    <button id='borrar' className='boton-controles' onMouseDown={handleBorrar}>↩</button>
-                    <button id='apuntes' className={apuntesActivados ? 'boton-controles apuntes-activados' : 'boton-controles' } onMouseDown={handleApuntes} >✎</button>    
+                    <button id='reiniciar' className='boton-utilidades' onMouseDown={handleReiniciar}>↻</button>
+                    <button id='borrar' className='boton-utilidades' onMouseDown={handleBorrar}>↩</button>
+                    <button id='apuntes' className={apuntesActivados ? 'boton-utilidades apuntes-activados' : 'boton-utilidades' } onMouseDown={handleApuntes} >✎</button>    
                 </div>
-                
-
+                <div className='contenedor-teclado'>
+                    {/* Genera un array de 9 elementos button para el teclado */}
+                    {Array.from({ length: 9 }, (_, index) => <button key={index} className='boton-teclado' >{1 + index}</button> )}
+                </div>
             </div>
         </>
     )
