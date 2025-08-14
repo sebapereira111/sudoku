@@ -34,9 +34,13 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesA
     return (
         <>
             <div className='contenedor-controles'>
-                <button id='reiniciar' onMouseDown={handleReiniciar}>↻</button>
-                <button id='borrar' onMouseDown={handleBorrar}>↩</button>
-                <button id='apuntes' className={apuntesActivados ? 'apuntes-activados' : "" } onMouseDown={handleApuntes} >✎</button>
+                <div className='contenedor-utilidades'>
+                    <button id='reiniciar' className='boton-controles' onMouseDown={handleReiniciar}>↻</button>
+                    <button id='borrar' className='boton-controles' onMouseDown={handleBorrar}>↩</button>
+                    <button id='apuntes' className={apuntesActivados ? 'boton-controles apuntes-activados' : 'boton-controles' } onMouseDown={handleApuntes} >✎</button>    
+                </div>
+                
+
             </div>
         </>
     )
