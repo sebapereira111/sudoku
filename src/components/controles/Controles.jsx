@@ -8,19 +8,7 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSe
         e.preventDefault();
     }
 
-    function handleBorrar(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes);
-    }
-
-    function handleApuntes(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes);
-    }
-
-    function handleNumero(e) {
+    function handleMouseDown(e) {
         e.stopPropagation();
         e.preventDefault();
         inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes);
@@ -31,12 +19,12 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSe
             <div className='contenedor-controles'>
                 <div className='contenedor-utilidades'>
                     <button id='reiniciar' className='boton-utilidades' onMouseDown={handleReiniciar}>↻</button>
-                    <button id='borrar' className='boton-utilidades' onMouseDown={handleBorrar}>↩</button>
-                    <button id='apuntes' className={apuntesActivados ? 'boton-utilidades apuntes-activados' : 'boton-utilidades' } onMouseDown={handleApuntes} >✎</button>    
+                    <button id='borrar' className='boton-utilidades' onMouseDown={handleMouseDown}>↩</button>
+                    <button id='apuntes' className={apuntesActivados ? 'boton-utilidades apuntes-activados' : 'boton-utilidades' } onMouseDown={handleMouseDown} >✎</button>    
                 </div>
                 <div className='contenedor-teclado'>
                     {/* Genera un array de 9 elementos button para el teclado */}
-                    {Array.from({ length: 9 }, (_, index) => <button key={1 + index} id={1 + index} className='boton-teclado' onMouseDown={handleNumero}>{1 + index}</button> )}
+                    {Array.from({ length: 9 }, (_, index) => <button key={1 + index} id={1 + index} className='boton-teclado' onMouseDown={handleMouseDown}>{1 + index}</button> )}
                 </div>
             </div>
         </>
