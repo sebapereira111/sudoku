@@ -8,7 +8,7 @@ function App() {
     const tableroInicial = validTest;
     const [tableroActual, setTableroActual] = useState(tableroInicial);
     const [boxSeleccionado, setBoxSeleccionado] = useState({
-        filaBloqueIndex: 0,
+        filaBloqueIndex: 3,
         colBloqueIndex: 0,
         filaBoxIndex: 0,
         colBoxIndex: 0

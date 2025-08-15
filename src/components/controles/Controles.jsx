@@ -2,7 +2,6 @@ import './Controles.css'
 import { inputChange } from '../../utils/inputChange';
 
 function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes }) {
-    const valorSeleccionado = tableroInicial[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex];
 
     function handleReiniciar(e) {
         e.stopPropagation();

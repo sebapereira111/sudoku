@@ -14,6 +14,11 @@ const classSelector = function(tableroActual, tableroInicial, filaBloqueIndex, c
         clase.push('texto-azul');
     }
 
+    if (boxSeleccionado.filaBloqueIndex == 3) {
+        clase.push('fondo-general')
+        return clase.join(' ');
+    }
+
     /* Despues definimos el color del bloque */
     if ((filaBloqueIndex == boxSeleccionado.filaBloqueIndex) && (colBloqueIndex == boxSeleccionado.colBloqueIndex) && (filaBoxIndex == boxSeleccionado.filaBoxIndex) && (colBoxIndex == boxSeleccionado.colBoxIndex)) {
         // Fondo para box seleccionado
