@@ -11,23 +11,19 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSe
     function handleBorrar(e) {
         e.stopPropagation();
         e.preventDefault();
-        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, tableroActual, apuntes, setApuntes);
+        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes);
     }
 
     function handleApuntes(e) {
         e.stopPropagation();
         e.preventDefault();
-        if(apuntesActivados) {
-            setApuntesActivados(false);
-        } else {
-            setApuntesActivados(true);
-        }
+        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes);
     }
 
     function handleNumero(e) {
         e.stopPropagation();
         e.preventDefault();
-        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, tableroActual, apuntes, setApuntes);
+        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes);
     }
 
     return (

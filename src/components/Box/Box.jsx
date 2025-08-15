@@ -3,7 +3,7 @@ import './Box.css'
 import { classSelector } from '../../utils/boxColors';
 import { inputChange } from '../../utils/inputChange';
 
-function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado, setBoxSeleccionado, apuntesActivados, apuntes, setApuntes }) {
+function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado, setBoxSeleccionado, apuntesActivados, setApuntesActivados, apuntes, setApuntes }) {
     // El valor del box, solo para no tener que esctibir todo cada vez
     const valor = tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex];
 
@@ -24,7 +24,7 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
     // Primero filtra solo los valores validos y actualiza el tablero actual correspondientemente
     // Luego actualiza el valor de box seleccionado
     function handleKeyDown(e) {
-        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, tableroActual, apuntes, setApuntes);
+        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes);
     }
 
     function mostrarApuntes() {

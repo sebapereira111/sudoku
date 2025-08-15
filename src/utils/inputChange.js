@@ -1,7 +1,7 @@
 // Se encaraga de actualizar el valor en el box seleccionado (con foco)
 // Primero filtra solo los valores validos y actualiza el tablero actual correspondientemente
 // Luego actualiza el valor de box seleccionado
-function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, tableroActual, apuntes, setApuntes) {
+function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes) {
     const valor = tableroActual[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex];
     
     // Se filtra el tipo de entrada
@@ -11,10 +11,21 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
 
     // Se carga el valor del input recibido como texto (igual si es numero)
     const input = (e.type == 'keydown') ? e.key : e.target.id
+    console.log(input);
     // Para comprobar si es uno de los inputs validos
     const esNumero = /^[1-9]$/.test(input);
     const esBorrar = ['0', 'Delete', 'Backspace', 'borrar'].includes(input);
     const esFlecha = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(input);
+    const esApunte = ['apuntes', 'a', 'A', ' '].includes(input);
+
+    // Si se presiona a o A o tecla apuntes
+    if (esApunte) {
+        if(apuntesActivados) {
+            setApuntesActivados(false);
+        } else {
+            setApuntesActivados(true);
+        }
+    }
 
     // Si se presiona alguna de las flechas para mover el box seleccionado
     if(esFlecha) {
