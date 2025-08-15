@@ -1,6 +1,7 @@
 import './Controles.css'
+import { inputChange } from '../../utils/inputChange';
 
-function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesActivados, setApuntesActivados }) {
+function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes }) {
     const valorSeleccionado = tableroInicial[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex];
 
     function handleReiniciar(e) {
@@ -11,13 +12,7 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesA
     function handleBorrar(e) {
         e.stopPropagation();
         e.preventDefault();
-        if (!valorSeleccionado) {
-            setTableroActual((prev => {
-                const newArr = structuredClone(prev);
-                newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
-                return newArr
-            }));  
-        } 
+        inputChange(e, tableroInicial, boxSeleccionado, setTableroActual, apuntesActivados, tableroActual, apuntes, setApuntes);
     }
 
     function handleApuntes(e) {
@@ -30,6 +25,12 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesA
         }
     }
 
+    function handleNumero(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        inputChange(e, tableroInicial, boxSeleccionado, setTableroActual, apuntesActivados, tableroActual, apuntes, setApuntes);
+    }
+
     return (
         <>
             <div className='contenedor-controles'>
@@ -40,7 +41,7 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesA
                 </div>
                 <div className='contenedor-teclado'>
                     {/* Genera un array de 9 elementos button para el teclado */}
-                    {Array.from({ length: 9 }, (_, index) => <button key={index} className='boton-teclado' >{1 + index}</button> )}
+                    {Array.from({ length: 9 }, (_, index) => <button key={1 + index} id={1 + index} className='boton-teclado' onMouseDown={handleNumero}>{1 + index}</button> )}
                 </div>
             </div>
         </>

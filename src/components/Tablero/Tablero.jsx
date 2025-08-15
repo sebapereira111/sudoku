@@ -1,7 +1,7 @@
 import './Tablero.css'
 import Bloque from '../Bloque/Bloque.jsx'
 
-function Tablero({ tableroActual, setTableroActual, tableroInicial, boxSeleccionado, setBoxSeleccionado, apuntesActivados }) {
+function Tablero({ tableroActual, setTableroActual, tableroInicial, boxSeleccionado, setBoxSeleccionado, apuntesActivados, apuntes, setApuntes }) {
     return (
         <>
             <div className='contenedor-tablero'>
@@ -12,7 +12,8 @@ function Tablero({ tableroActual, setTableroActual, tableroInicial, boxSeleccion
                         tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
                         filaBloqueIndex={filaBloqueIndex} colBloqueIndex={colBloqueIndex} 
                         boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado}
-                        apuntesActivados={apuntesActivados} />
+                        apuntesActivados={apuntesActivados} 
+                        apuntes={apuntes} setApuntes={setApuntes} />
                     ))
                 ))}
             </div>
