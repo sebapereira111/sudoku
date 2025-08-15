@@ -3,6 +3,11 @@ import { inputChange } from '../../utils/inputChange';
 
 function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSeleccionado, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes }) {
 
+    function handleNuevo(e) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+
     function handleReiniciar(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -18,6 +23,7 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSe
         <>
             <div className='contenedor-controles'>
                 <div className='contenedor-utilidades'>
+                    <button id='nuevo' className='boton-utilidades' onMouseDown={handleNuevo}>▶︎</button>
                     <button id='reiniciar' className='boton-utilidades' onMouseDown={handleReiniciar}>↻</button>
                     <button id='borrar' className='boton-utilidades' onMouseDown={handleMouseDown}>↩</button>
                     <button id='apuntes' className={apuntesActivados ? 'boton-utilidades apuntes-activados' : 'boton-utilidades' } onMouseDown={handleMouseDown} >✎</button>    
