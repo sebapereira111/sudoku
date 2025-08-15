@@ -1,7 +1,7 @@
 import './Controles.css'
 import { inputChange } from '../../utils/inputChange';
 
-function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes }) {
+function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSeleccionado, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes }) {
 
     function handleReiniciar(e) {
         e.stopPropagation();
@@ -11,7 +11,7 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesA
     function handleBorrar(e) {
         e.stopPropagation();
         e.preventDefault();
-        inputChange(e, tableroInicial, boxSeleccionado, setTableroActual, apuntesActivados, tableroActual, apuntes, setApuntes);
+        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, tableroActual, apuntes, setApuntes);
     }
 
     function handleApuntes(e) {
@@ -27,7 +27,7 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, apuntesA
     function handleNumero(e) {
         e.stopPropagation();
         e.preventDefault();
-        inputChange(e, tableroInicial, boxSeleccionado, setTableroActual, apuntesActivados, tableroActual, apuntes, setApuntes);
+        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, tableroActual, apuntes, setApuntes);
     }
 
     return (

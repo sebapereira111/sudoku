@@ -28,10 +28,6 @@
     cursor: grabbing;
 }
 
-.box:focus {  
-    background-color: rgba(31, 173, 163, 1);
-}
-
 .texto-negro {
     color: black;
 }
@@ -45,7 +41,7 @@
 }
 
 .fondo-seleccionado {
-    background-color: rgba(31, 173, 163, 0.5);
+    background-color: rgba(31, 173, 163, 1);
 }
 
 .fondo-invalido {

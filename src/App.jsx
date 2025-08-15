@@ -36,7 +36,7 @@ function App() {
                 apuntesActivados={apuntesActivados} 
                 apuntes={apuntes} setApuntes={setApuntes} />
                 <Controles setTableroActual={setTableroActual} tableroInicial={tableroInicial} 
-                boxSeleccionado={boxSeleccionado} 
+                boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado} 
                 apuntesActivados={apuntesActivados} setApuntesActivados={setApuntesActivados} 
                 apuntes={apuntes} setApuntes={setApuntes} 
                 tableroActual={tableroActual} />

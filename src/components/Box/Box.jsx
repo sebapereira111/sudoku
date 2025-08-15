@@ -24,7 +24,7 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
     // Primero filtra solo los valores validos y actualiza el tablero actual correspondientemente
     // Luego actualiza el valor de box seleccionado
     function handleKeyDown(e) {
-        inputChange(e, tableroInicial, boxSeleccionado, setTableroActual, apuntesActivados, tableroActual, apuntes, setApuntes);
+        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, tableroActual, apuntes, setApuntes);
     }
 
     function mostrarApuntes() {
@@ -39,7 +39,8 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
         <div className={classSelector(tableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado)} 
         onMouseDown={handleClick} 
         onKeyDown={handleKeyDown} 
-        tabIndex={0} >
+        tabIndex={0} 
+        id={filaBloqueIndex+'-'+colBloqueIndex+'-'+filaBoxIndex+'-'+colBoxIndex} >
             {valor ? valor : mostrarApuntes()}
         </div>
     )
