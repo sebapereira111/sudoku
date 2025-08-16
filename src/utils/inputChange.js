@@ -14,9 +14,31 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
     console.log(input);
     // Para comprobar si es uno de los inputs validos
     const esNumero = /^[1-9]$/.test(input);
-    const esBorrar = ['0', 'Delete', 'Backspace', 'borrar'].includes(input);
+    const esBorrar = ['borrar', '0', 'Delete', 'Backspace'].includes(input);
     const esFlecha = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(input);
     const esApunte = ['apuntes', 'a', 'A', ' '].includes(input);
+    const esReset = ['reset', 'r', 'R'].includes(input);
+
+    // Si se presiona r o R o tecla reseteat
+    if (esReset) {
+        const newTablero = structuredClone(tableroInicial);
+        setTableroActual(newTablero);
+        setApuntes(Array.from({ length: 3 }, () =>
+            Array.from({ length: 3 }, () => 
+                Array.from({ length: 3 }, () => 
+                    Array.from({ length: 3 }, () => Array(9).fill(0))
+                )
+            )
+        ));
+        setApuntesActivados(false);
+        setBoxSeleccionado({
+            filaBloqueIndex: 3,
+            colBloqueIndex: 0,
+            filaBoxIndex: 0,
+            colBoxIndex: 0
+        });
+        return
+    }
 
     // Si se presiona a o A o tecla apuntes
     if (esApunte) {
@@ -25,6 +47,7 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
         } else {
             setApuntesActivados(true);
         }
+        return
     }
 
     // Si se presiona alguna de las flechas para mover el box seleccionado
@@ -93,6 +116,7 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
             newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
             return newArr
         }));
+        return
     }
 
     if (esNumero) {
@@ -125,6 +149,7 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
                 return newArr
             }));
         }
+        return
     }
 }
 
