@@ -2,10 +2,14 @@ import { useState } from 'react';
 import './App.css';
 import Tablero from './components/Tablero/Tablero.jsx';
 import Controles from './components/controles/Controles.jsx';
-import { test, validTest} from './constants/tableros.js';
+import { test, tableroValido} from './constants/tableros.js';
+import { generarTablero } from './utils/generarTablero.js';
 
 function App() {
-    const tableroInicial = validTest;
+    // Primero generamos el tablero de resultado valido
+    const tableroResultado = generarTablero();
+    // Despues eliminamos algunos numeros para generar el tablero inicial
+    const tableroInicial = tableroResultado;
     const [tableroActual, setTableroActual] = useState(tableroInicial);
     const [boxSeleccionado, setBoxSeleccionado] = useState({
         filaBloqueIndex: 3,
