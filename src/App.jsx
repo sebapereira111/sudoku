@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Tablero from './components/Tablero/Tablero.jsx';
 import Controles from './components/controles/Controles.jsx';
