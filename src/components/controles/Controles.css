@@ -1,14 +1,20 @@
 .contenedor-controles {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor-controles-juego {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 1rem;
+
 }
 
 .contenedor-utilidades {
     display: flex;
     flex-direction: column;
-    margin: 1rem;
+
 }
 
 .boton-utilidades {
@@ -16,6 +22,10 @@
     height: 6rem;
     width: 6rem;
     font-size: 4rem;
+}
+
+.apuntes-activados {
+    background-color: rgba(31, 173, 163, 0.75);
 }
 
 .contenedor-teclado {
@@ -32,6 +42,29 @@
     border-radius: 2.5rem;
 }
 
-.apuntes-activados {
-    background-color: rgba(31, 173, 163, 0.75);
+.contenedor-nuevo-juego {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.contenedor-slider-dificultad {
+    display: flex;
+    flex-direction: column;
+    width: 18rem;
+}
+
+.etiqueta-dificultad {
+    font-size: 2rem;
+}
+
+.etiquetas-slider-dificultad {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.slider-dificultad {
+    width: 100%;
 }

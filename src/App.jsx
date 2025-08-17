@@ -7,6 +7,7 @@ import { generarTablero } from './utils/generarTablero.js';
 
 function App() {
     // Primero generamos el tablero de resultado valido
+    const [dificultad, setDificultad] = useState(30);
     const tableroResultado = generarTablero();
     // Despues eliminamos algunos numeros para generar el tablero inicial
     const tableroInicial = tableroResultado;
@@ -26,14 +27,15 @@ function App() {
         )
     ));
 
-    function handelMouseDown(e) {
-        e.preventDefault();
-        console.log(document.activeElement); // Devuelve el nodo DOM con foco
+    function handleMouseDown(e) {
+        if (!(e.target.id == 'dificultad')) {
+            e.preventDefault();
+        } 
     }
 
     return (
         <>
-            <div className='fondo' onMouseDown={handelMouseDown} >
+            <div className='fondo' onMouseDown={handleMouseDown} >
                 <Tablero 
                 tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
                 boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado} 
@@ -43,7 +45,8 @@ function App() {
                 boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado} 
                 apuntesActivados={apuntesActivados} setApuntesActivados={setApuntesActivados} 
                 apuntes={apuntes} setApuntes={setApuntes} 
-                tableroActual={tableroActual} />
+                tableroActual={tableroActual} 
+                dificultad={dificultad} setDificultad={setDificultad} />
             </div>
         </>
     )
