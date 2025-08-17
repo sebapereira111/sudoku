@@ -8,10 +8,10 @@ import { generarTablero } from './utils/generarTablero.js';
 function App() {
     // Primero generamos el tablero de resultado valido
     const [dificultad, setDificultad] = useState(45);
-    const tableroResultado = generarTablero();
+    const [tableroResultado, setTableroResultado] = useState(generarTablero());
     // Despues eliminamos algunos numeros para generar el tablero inicial
-    const tableroInicial = tableroResultado;
-    const [tableroActual, setTableroActual] = useState(tableroInicial);
+    const tableroInicial = structuredClone(tableroResultado);
+    const [tableroActual, setTableroActual] = useState(structuredClone(tableroInicial));
     const [boxSeleccionado, setBoxSeleccionado] = useState({
         filaBloqueIndex: 3,
         colBloqueIndex: 0,
