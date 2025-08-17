@@ -2,27 +2,16 @@
 // Primero filtra solo los valores validos y actualiza el tablero actual correspondientemente
 // Luego actualiza el valor de box seleccionado
 function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad) {
-    if (!(boxSeleccionado.filaBloqueIndex == 3)) {
-        const valor = tableroActual[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex];
-    }
-
     // Se filtra el tipo de entrada
     if (!(e.type == 'keydown' || e.type == 'mousedown' || e.type == 'change')) {
         return
     }
-
+    
     // Se carga el valor del input recibido como texto (igual si es numero)
     const input = (e.type == 'keydown') ? e.key : e.target.id
 
-    // Para comprobar si es uno de los inputs validos
-    const esNumero = /^[1-9]$/.test(input);
-    const esBorrar = ['borrar', '0', 'Delete', 'Backspace'].includes(input);
-    const esFlecha = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(input);
-    const esApunte = ['apuntes', 'a', 'A', ' '].includes(input);
-    const esReset = ['reset', 'r', 'R'].includes(input);
     const esDificultad = ['dificultad'].includes(input);
-
-    // Si es el slide de dificultad
+    // Si es el slider de dificultad
     if (esDificultad) {
         setDificultad(Number(e.target.value));
         if (!(boxSeleccionado.filaBloqueIndex == 3)) {
@@ -31,7 +20,19 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
         }
         return
     }
-        
+    
+    if (boxSeleccionado.filaBloqueIndex == 3) {
+        return
+    }
+    
+    const valor = tableroActual[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex];
+
+    // Para comprobar si es uno de los inputs validos
+    const esNumero = /^[1-9]$/.test(input);
+    const esBorrar = ['borrar', '0', 'Delete', 'Backspace'].includes(input);
+    const esFlecha = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(input);
+    const esApunte = ['apuntes', 'a', 'A', ' '].includes(input);
+    const esReset = ['reset', 'r', 'R'].includes(input);
 
     // Si se presiona r o R o tecla reseteat
     if (esReset) {
@@ -168,4 +169,3 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
 }
 
 export { inputChange }
-
