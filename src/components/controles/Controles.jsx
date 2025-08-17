@@ -49,7 +49,7 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSe
                             max="60"
                             value={dificultad}
                             onChange={handleChange}
-                            step="5" />
+                            step="1" />
                     </div>
                 </div>
             </div>

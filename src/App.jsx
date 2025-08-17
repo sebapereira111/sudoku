@@ -7,7 +7,7 @@ import { generarTablero } from './utils/generarTablero.js';
 
 function App() {
     // Primero generamos el tablero de resultado valido
-    const [dificultad, setDificultad] = useState(30);
+    const [dificultad, setDificultad] = useState(45);
     const tableroResultado = generarTablero();
     // Despues eliminamos algunos numeros para generar el tablero inicial
     const tableroInicial = tableroResultado;
