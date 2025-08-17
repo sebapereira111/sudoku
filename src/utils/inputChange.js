@@ -36,8 +36,7 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
 
     // Si se presiona r o R o tecla reseteat
     if (esReset) {
-        const newTablero = structuredClone(tableroInicial);
-        setTableroActual(newTablero);
+        setTableroActual(structuredClone(tableroInicial));
         setApuntes(Array.from({ length: 3 }, () =>
             Array.from({ length: 3 }, () => 
                 Array.from({ length: 3 }, () => 
