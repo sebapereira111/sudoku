@@ -2,9 +2,9 @@ import {useState } from 'react';
 import './Controles.css'
 import { inputChange } from '../../utils/inputChange';
 import { generarTableroResultado } from '../../utils/generarTableroResultado';
-import { generarTableroInicial, solucionUnica } from '../../utils/generarTableroInicial';
+import { generarTableroInicial, unaSolucion } from '../../utils/generarTableroInicial';
 
-function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSeleccionado, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, dificultad, setDificultad, tableroResultado, setTableroResultado, setTableroInicial }) {
+function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSeleccionado, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, dificultad, setDificultad, tableroResultado, setTableroResultado, setTableroInicial, solucionUnica, setSolucionUnica }) {
 
     function handleNuevo(e) {
         e.stopPropagation();
@@ -32,7 +32,7 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSe
             )
         ));
         console.time('calculo')
-        console.log(solucionUnica(nuevoTableroInicial, dificultad));
+        console.log(unaSolucion(nuevoTableroInicial, dificultad));
         console.timeEnd('calculo')
     }
 
@@ -40,6 +40,11 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSe
         e.stopPropagation();
         e.preventDefault();
         inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad);
+    }
+
+    function handleChangeSolucionUnica(e) {
+        setSolucionUnica(e.target.checked);
+        console.log(e.target.checked)
     }
 
     return (
@@ -77,6 +82,16 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSe
                             value={dificultad}
                             onChange={handleChange}
                             step="1" />
+                        <div className='toggle-solucion-unica'>
+                            <h2>Solucion unica</h2>
+                            <label className="toggle-switch">
+                                <input 
+                                type="checkbox" 
+                                value={solucionUnica}
+                                onChange={handleChangeSolucionUnica}/>
+                                <span className="slider"></span>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,8 +101,6 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSe
 }
 
 export default Controles
-
-
 
 
 

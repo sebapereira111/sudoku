@@ -18,7 +18,7 @@ function identificarBoxesVacios(tableroPrueba) {
 }
 
 // Recibe un tablero yu la dificultad, returna true si tiene una sola solucion, false si tiene al menos 2
-function solucionUnica(tablero, dificultad) {
+function unaSolucion(tablero, dificultad) {
     const tableroPrueba = structuredClone(tablero);
     const boxVacio = identificarBoxesVacios(tableroPrueba);
     const respuestas = Array.from({ length: dificultad }, () => 9)
@@ -89,4 +89,4 @@ function generarTableroInicial(tablero, dificultad) {
     return tableroInicial
 }
 
-export { generarTableroInicial, solucionUnica }
+export { generarTableroInicial, unaSolucion }

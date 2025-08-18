@@ -4,7 +4,7 @@ import Tablero from './components/Tablero/Tablero.jsx';
 import Controles from './components/controles/Controles.jsx';
 import { test, tableroValido, tableroVacio} from './constants/tableros.js';
 import { generarTableroResultado } from './utils/generarTableroResultado.js';
-import { generarTableroInicial, solucionUnica } from './utils/generarTableroInicial.js';
+import { generarTableroInicial, unaSolucion } from './utils/generarTableroInicial.js';
 
 function App() {
     // Dificultad es cuantos boxes se eliminan
@@ -29,6 +29,7 @@ function App() {
             )
         )
     ));
+    const [solucionUnica, setSolucionUnica] = useState(false)
 
     function handleMouseDown(e) {
         if (!(e.target.id == 'dificultad')) {
@@ -51,7 +52,8 @@ function App() {
                 tableroActual={tableroActual} 
                 dificultad={dificultad} setDificultad={setDificultad} 
                 tableroResultado={tableroResultado} setTableroResultado = {setTableroResultado} 
-                setTableroInicial={setTableroInicial} />
+                setTableroInicial={setTableroInicial} 
+                solucionUnica={solucionUnica} setSolucionUnica={setSolucionUnica} />
             </div>
         </>
     )
