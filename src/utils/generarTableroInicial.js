@@ -83,10 +83,6 @@ function generarTableroInicial(tablero, dificultad) {
         tableroInicial[eliminarNumero.filaBloqueIndex][eliminarNumero.colBloqueIndex][eliminarNumero.filaBoxIndex][eliminarNumero.colBoxIndex] = 0;
 
     }
-    
-    // Probamos si tenemos una solucion unica
-
-    solucionUnica(tableroInicial, dificultad);
 
     // Retornamos el tablero para jugar
     return tableroInicial

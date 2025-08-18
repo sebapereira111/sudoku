@@ -1,12 +1,17 @@
 import {useState } from 'react';
 import './Controles.css'
 import { inputChange } from '../../utils/inputChange';
+import { generarTableroResultado } from '../../utils/generarTableroResultado';
+import { generarTableroInicial } from '../../utils/generarTableroInicial';
 
-function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSeleccionado, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, dificultad, setDificultad }) {
+function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSeleccionado, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, dificultad, setDificultad, tableroResultado, setTableroResultado, setTableroInicial }) {
 
     function handleNuevo(e) {
         e.stopPropagation();
         e.preventDefault();
+        setTableroResultado(generarTableroResultado());
+        setTableroInicial(generarTableroInicial(tableroResultado, dificultad));
+        
     }
 
     function handleChange(e) {

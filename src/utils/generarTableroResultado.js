@@ -1,4 +1,4 @@
-import { test, tableroValido } from "../constants/tableros";
+import { tableroValido } from "../constants/tableros";
 import { valorValido } from "./validacion";
 
 // Recibe una matriz tablero y 2 numeros, reemplaza el segundo numero en la ubicacion del primero
