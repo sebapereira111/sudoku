@@ -2,7 +2,7 @@
 
 ## Pendientes
 
-- Modo oscuro/claro.
+- Modo oscuro/claro. ✅ (se puede mejorar)
 - Mostrar/elegir si el tablero es unico.
 - Bloqueo de pantalla mientras genera nuevo juego. 
 - Mejorar y ordenar logica de controles. Separar en funciones. 
