@@ -6,7 +6,7 @@ import Controles from './components/controles/Controles.jsx';
 import { TableroProvider } from './context/TableroProvider.jsx';
 
 function App() {
-    const [darkMode, setDarkMode] = useState(false)
+    const [darkMode, setDarkMode] = useState(window.matchMedia("(prefers-color-scheme: dark)").matches)
 
     function handleMouseDown(e) {
         if (!(e.target.id == 'dificultad')) {
