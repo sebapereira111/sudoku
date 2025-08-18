@@ -9,6 +9,7 @@
 - Mostrar Reglas
 - Mostrar tiempo de juego
 - Ordenar/agrupar variables/props
+- Comentar codigo
 
 Los pendientes no estan en orden de prioridad
 
