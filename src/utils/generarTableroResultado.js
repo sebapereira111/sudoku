@@ -55,7 +55,7 @@ function transposicionTablero(tablero) {
     return result
 }
 
-function generarTablero() {
+function generarTableroResultado() {
     // Primero clonamos le tablero valido para no modificar la referencia
     let tableroInicio = structuredClone(tableroValido)
 
@@ -91,4 +91,4 @@ function generarTablero() {
     return tableroInicio;
 }
 
-export { generarTablero }
+export { generarTableroResultado }

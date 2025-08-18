@@ -3,14 +3,17 @@ import './App.css';
 import Tablero from './components/Tablero/Tablero.jsx';
 import Controles from './components/controles/Controles.jsx';
 import { test, tableroValido} from './constants/tableros.js';
-import { generarTablero } from './utils/generarTablero.js';
+import { generarTableroResultado } from './utils/generarTableroResultado.js';
+import { generarTableroInicial, solucionUnica } from './utils/generarTableroInicial.js';
 
 function App() {
-    // Primero generamos el tablero de resultado valido
+    // Dificultad es cuantos boxes se eliminan
     const [dificultad, setDificultad] = useState(45);
-    const [tableroResultado, setTableroResultado] = useState(generarTablero());
+    // Primero generamos el tablero de resultado valido
+    const [tableroResultado, setTableroResultado] = useState(generarTableroResultado());
     // Despues eliminamos algunos numeros para generar el tablero inicial
-    const tableroInicial = structuredClone(tableroResultado);
+    const [tableroInicial, setTableroInicial] = useState(() => generarTableroInicial(tableroResultado, dificultad));
+    
     const [tableroActual, setTableroActual] = useState(structuredClone(tableroInicial));
     const [boxSeleccionado, setBoxSeleccionado] = useState({
         filaBloqueIndex: 3,
