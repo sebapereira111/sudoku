@@ -2,9 +2,9 @@
 
 ## Pendientes
 
-- Modo oscuro/claro
-- Bloqueo de pantalla mientras genera nuevo juego
-
+- Modo oscuro/claro. 
+- Bloqueo de pantalla mientras genera nuevo juego. 
+- Mejorar y ordenar logica de controles. Separar en funciones. 
 
 
 
