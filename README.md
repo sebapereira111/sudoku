@@ -8,6 +8,7 @@
 - Mejorar y ordenar logica de controles. Separar en funciones. 
 - Mostrar Reglas
 - Mostrar tiempo de juego
+- Ordenar/agrupar variables/props
 
 Los pendientes no estan en orden de prioridad
 
