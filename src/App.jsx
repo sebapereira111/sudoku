@@ -9,7 +9,9 @@ function App() {
     const [darkMode, setDarkMode] = useState(false)
 
     function handleMouseDown(e) {
-        e.preventDefault();
+        if (!(e.target.id == 'dificultad')) {
+            e.preventDefault();
+        }
     }
 
     function handleChangeDarkMode(e) {
@@ -22,7 +24,7 @@ function App() {
 
     return (
         <>
-            <div className='fondo' onMouseDown={handleMouseDown} >
+            <div className={darkMode ? 'fondo dark' : 'fondo light'} onMouseDown={handleMouseDown} >
                 <TableroProvider>
                     <Tablero />
                     <Controles />

@@ -11,7 +11,7 @@
     text-align: center;
     /* Bordes */
     border-style: dotted;
-    border-color: black;
+    border-color: var(--text);
     border-width: 0.5px;
     /* Para cambiar el cursor */
     cursor: grab;
@@ -29,7 +29,7 @@
 }
 
 .texto-negro {
-    color: black;
+    color: var(--text);
 }
 
 .texto-azul {
@@ -37,7 +37,7 @@
 }
 
 .fondo-general {
-    background-color: white;
+    background-color: var(--bg);
 }
 
 .fondo-seleccionado {

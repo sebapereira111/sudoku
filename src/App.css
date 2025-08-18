@@ -6,6 +6,8 @@
     align-items: center;
     width: 100%;
     height: 100%;
+    background-color: var(--bg);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .dark-mode-toggle-switch {
@@ -18,6 +20,7 @@
 
 .dark-switch-text {
     font-size: 32px;
+    color: var(--text);
 }
 
 /* Container for the toggle */
@@ -68,4 +71,14 @@
 
 .toggle-switch input:checked+.slider::before {
     transform: translateX(32px);
+}
+
+.dark {
+    --bg: rgba(0, 0, 0, 0.9);
+    --text: white;
+}
+
+.light {
+    --bg: white;
+    --text: black;
 }

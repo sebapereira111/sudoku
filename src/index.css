@@ -42,7 +42,7 @@ button {
 }
 
 button:hover {
-    border-color: black;
+    border-color: var(--text);
 }
 
 button:active {

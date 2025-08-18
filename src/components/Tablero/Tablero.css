@@ -9,7 +9,7 @@
     /* Bordes */
     /* Los bordes son para resaltar el tablero */
     border-style: solid;
-    border-color: black;
+    border-color: var(--text);
     border-width: 4px;
     /* Margenes */
     margin: 1rem;

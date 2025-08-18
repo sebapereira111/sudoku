@@ -7,6 +7,6 @@
     /* Bordes */
     /* Los bordes son para resaltar los bloques */
     border-style: solid;
-    border-color: black;
+    border-color: var(--text);
     border-width: 1px;
 }
