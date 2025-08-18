@@ -6,6 +6,9 @@
 - Bloqueo de pantalla mientras genera nuevo juego. 
 - Mejorar y ordenar logica de controles. Separar en funciones. 
 - Mostrar Reglas
+- Mostrar tiempo de juego
+
+Los pendientes no estan en orden de prioridad
 
 
 
