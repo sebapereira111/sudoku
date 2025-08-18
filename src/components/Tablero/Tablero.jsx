@@ -1,7 +1,10 @@
 import './Tablero.css'
 import Bloque from '../Bloque/Bloque.jsx'
+import { useTableroContext } from '../../context/TableroProvider.jsx'
 
-function Tablero({ tableroActual, setTableroActual, tableroInicial, boxSeleccionado, setBoxSeleccionado, apuntesActivados, setApuntesActivados, apuntes, setApuntes }) {
+function Tablero() {
+    const { tableroActual } = useTableroContext();
+    
     return (
         <>
             <div className='contenedor-tablero'>
@@ -9,11 +12,8 @@ function Tablero({ tableroActual, setTableroActual, tableroInicial, boxSeleccion
                     filaBloque.map((_, colBloqueIndex) => (
                         <Bloque 
                         key={`${filaBloqueIndex}-${colBloqueIndex}`} 
-                        tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
                         filaBloqueIndex={filaBloqueIndex} colBloqueIndex={colBloqueIndex} 
-                        boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado}
-                        apuntesActivados={apuntesActivados} setApuntesActivados={setApuntesActivados} 
-                        apuntes={apuntes} setApuntes={setApuntes} />
+                        />
                     ))
                 ))}
             </div>

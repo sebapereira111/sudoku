@@ -1,9 +1,18 @@
-import { useState } from 'react';
 import './Box.css'
 import { classSelector } from '../../utils/boxColors';
 import { inputChange } from '../../utils/inputChange';
+import { useTableroContext } from '../../context/TableroProvider.jsx'
 
-function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex, boxSeleccionado, setBoxSeleccionado, apuntesActivados, setApuntesActivados, apuntes, setApuntes }) {
+function Box({ filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex }) {
+    // importamos las variables de contexto
+    const { 
+        tableroInicial,
+        tableroActual, setTableroActual,
+        boxSeleccionado, setBoxSeleccionado,
+        apuntesActivados, setApuntesActivados,
+        apuntes, setApuntes
+     } = useTableroContext();
+
     // El valor del box, solo para no tener que esctibir todo cada vez
     const valor = tableroActual[filaBloqueIndex][colBloqueIndex][filaBoxIndex][colBoxIndex];
 
@@ -27,6 +36,7 @@ function Box({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex,
         inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes);
     }
 
+    // Se encarga de mostrar los apuntes en el box si ese box esta en cero
     function mostrarApuntes() {
         return (
             <div className='box-apuntes'>

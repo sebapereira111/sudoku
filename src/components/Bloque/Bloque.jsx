@@ -1,11 +1,10 @@
 import './Bloque.css'
 import Box from '../Box/Box.jsx'
+import { useTableroContext } from '../../context/TableroProvider.jsx'
 
-// Para identificar a cada uno de los elementos (box) del tablero se necesita 4 numeros
-// fila y columna del bloque, y fila y columna del box
+function Bloque({ filaBloqueIndex, colBloqueIndex }) {
+    const { tableroActual } = useTableroContext();
 
-
-function Bloque({ tableroActual, setTableroActual, tableroInicial, filaBloqueIndex, colBloqueIndex, boxSeleccionado, setBoxSeleccionado, apuntesActivados, setApuntesActivados, apuntes, setApuntes }) {
     return (
         <>
             <div className='contenedor-bloque'>
@@ -13,12 +12,9 @@ function Bloque({ tableroActual, setTableroActual, tableroInicial, filaBloqueInd
                     filaBox.map((_, colBoxIndex) => (
                         <Box 
                         key={`${filaBoxIndex}-${colBoxIndex}`} 
-                        tableroActual={tableroActual} setTableroActual={setTableroActual} tableroInicial={tableroInicial}
                         filaBloqueIndex={filaBloqueIndex} colBloqueIndex={colBloqueIndex} 
                         filaBoxIndex={filaBoxIndex} colBoxIndex={colBoxIndex} 
-                        boxSeleccionado={boxSeleccionado} setBoxSeleccionado={setBoxSeleccionado} 
-                        apuntesActivados={apuntesActivados} setApuntesActivados={setApuntesActivados} 
-                        apuntes={apuntes} setApuntes={setApuntes} />
+                        />
                     ))
                 ))}
             </div>

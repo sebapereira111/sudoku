@@ -1,16 +1,32 @@
-import {useState } from 'react';
 import './Controles.css'
 import { inputChange } from '../../utils/inputChange';
 import { generarTableroResultado } from '../../utils/generarTableroResultado';
 import { generarTableroInicial, unaSolucion } from '../../utils/generarTableroInicial';
+import { useTableroContext, useControlesContext } from '../../context/TableroProvider';
 
-function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSeleccionado, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, dificultad, setDificultad, tableroResultado, setTableroResultado, setTableroInicial, solucionUnica, setSolucionUnica }) {
+function Controles() {
+    // Importamos las variables de contexto
+    const {
+        tableroInicial,
+        tableroActual, setTableroActual,
+        boxSeleccionado, setBoxSeleccionado,
+        apuntesActivados, setApuntesActivados,
+        apuntes, setApuntes
+    } = useTableroContext();
+    const {
+        tableroResultado, setTableroResultado,
+        setTableroInicial,
+        dificultad, setDificultad,
+        solucionUnica, setSolucionUnica
+    } = useControlesContext();
 
+    // Creamos un nuevo tablero
     function handleNuevo(e) {
         e.stopPropagation();
         e.preventDefault();
+
         const nuevoTableroResuldado = generarTableroResultado();
-        const nuevoTableroInicial = generarTableroInicial(structuredClone(nuevoTableroResuldado), dificultad)
+        const nuevoTableroInicial = generarTableroInicial(structuredClone(nuevoTableroResuldado), dificultad);
         // Primero generamos el tablero de resultado valido
         setTableroResultado(structuredClone(nuevoTableroResuldado));
         // Despues eliminamos algunos numeros para generar el tablero inicial
@@ -31,20 +47,16 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSe
                 )
             )
         ));
-        console.time('calculo')
-        console.log(unaSolucion(nuevoTableroInicial, dificultad));
-        console.timeEnd('calculo')
-    }
+        
+        const soloUnaSolucion = unaSolucion(nuevoTableroInicial, dificultad);
+        setSolucionUnica(soloUnaSolucion);
+        
+    } 
 
     function handleChange(e) {
         e.stopPropagation();
         e.preventDefault();
         inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad);
-    }
-
-    function handleChangeSolucionUnica(e) {
-        setSolucionUnica(e.target.checked);
-        console.log(e.target.checked)
     }
 
     return (
@@ -82,15 +94,10 @@ function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSe
                             value={dificultad}
                             onChange={handleChange}
                             step="1" />
-                        <div className='toggle-solucion-unica'>
-                            <h2>Solucion unica</h2>
-                            <label className="toggle-switch">
-                                <input 
-                                type="checkbox" 
-                                value={solucionUnica}
-                                onChange={handleChangeSolucionUnica}/>
-                                <span className="slider"></span>
-                            </label>
+                        <div className='solucion-unica'>
+                            <span>Solucion unica:</span>&nbsp;
+                            <span className={solucionUnica ? 'visible' : 'oculto'}>SI</span>
+                            <span className={solucionUnica ? 'oculto' : 'visible'}>NO</span>
                         </div>
                     </div>
                 </div>
