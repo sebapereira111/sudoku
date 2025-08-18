@@ -1,6 +1,6 @@
 # Sudoku
 
-Pendientes
+## Pendientes
 
 - Modo oscuro/claro
 - Bloqueo de pantalla mientras genera nuevo juego
