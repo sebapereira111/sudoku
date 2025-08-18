@@ -10,11 +10,11 @@ function App() {
     // Dificultad es cuantos boxes se eliminan
     const [dificultad, setDificultad] = useState(45);
     // Primero generamos el tablero de resultado valido
-    const [tableroResultado, setTableroResultado] = useState(generarTableroResultado());
+    const [tableroResultado, setTableroResultado] = useState(structuredClone(tableroVacio));
     // Despues eliminamos algunos numeros para generar el tablero inicial
-    const [tableroInicial, setTableroInicial] = useState(() => generarTableroInicial(tableroResultado, dificultad));
+    const [tableroInicial, setTableroInicial] = useState(structuredClone(tableroVacio));
     // Copiamos el tablero inicial en el tablero de trabajo
-    const [tableroActual, setTableroActual] = useState(structuredClone(tableroInicial));
+    const [tableroActual, setTableroActual] = useState(structuredClone(tableroVacio));
     const [boxSeleccionado, setBoxSeleccionado] = useState({
         filaBloqueIndex: 3,
         colBloqueIndex: 0,

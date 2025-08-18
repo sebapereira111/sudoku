@@ -2,16 +2,38 @@ import {useState } from 'react';
 import './Controles.css'
 import { inputChange } from '../../utils/inputChange';
 import { generarTableroResultado } from '../../utils/generarTableroResultado';
-import { generarTableroInicial } from '../../utils/generarTableroInicial';
+import { generarTableroInicial, solucionUnica } from '../../utils/generarTableroInicial';
 
 function Controles({ setTableroActual, tableroInicial, boxSeleccionado, setBoxSeleccionado, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, dificultad, setDificultad, tableroResultado, setTableroResultado, setTableroInicial }) {
 
     function handleNuevo(e) {
         e.stopPropagation();
         e.preventDefault();
-        setTableroResultado(generarTableroResultado());
-        setTableroInicial(generarTableroInicial(tableroResultado, dificultad));
-        
+        const nuevoTableroResuldado = generarTableroResultado();
+        const nuevoTableroInicial = generarTableroInicial(structuredClone(nuevoTableroResuldado), dificultad)
+        // Primero generamos el tablero de resultado valido
+        setTableroResultado(structuredClone(nuevoTableroResuldado));
+        // Despues eliminamos algunos numeros para generar el tablero inicial
+        setTableroInicial(structuredClone(nuevoTableroInicial));
+        // Copiamos el tablero inicial en el tablero de trabajo
+        setTableroActual(structuredClone(nuevoTableroInicial));
+        setBoxSeleccionado({
+            filaBloqueIndex: 3,
+            colBloqueIndex: 0,
+            filaBoxIndex: 0,
+            colBoxIndex: 0
+        });
+        setApuntesActivados(false);
+        setApuntes(Array.from({ length: 3 }, () =>
+            Array.from({ length: 3 }, () => 
+                Array.from({ length: 3 }, () => 
+                    Array.from({ length: 3 }, () => Array(9).fill(0))
+                )
+            )
+        ));
+        console.time('calculo')
+        console.log(solucionUnica(nuevoTableroInicial, dificultad));
+        console.timeEnd('calculo')
     }
 
     function handleChange(e) {

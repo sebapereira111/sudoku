@@ -61,6 +61,7 @@ function solucionUnica(tablero, dificultad) {
     return (cantidadDeSoluciones > 1) ? false : true
 }
 
+//Recibe un tablero y dificultad deseada, retorna un tablero con celdas eliminadas de acuerdo a la dificultad elegida
 function generarTableroInicial(tablero, dificultad) {
     
     // Primero creamos una nueva matriz para no modificar lo recibido
