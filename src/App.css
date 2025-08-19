@@ -28,17 +28,17 @@
     /* Color fondo */
     --bg: rgba(0, 0, 0, 0.85);
     /* Color texto */
-    --text: white;
+    --text: wheat;
     /* Color texto azul */
-    --text-azul: rgb(71, 71, 173);
+    --text-azul: white;
     /* Fondo seleccionado */
     --fs: rgb(56, 85, 83);
     /* Fondo invalido */
     --fi: rgb(211, 55, 55);
     /* Fondo bloque, fila y columna correspondiente al seleccionado */
-    --fbfc: rgba(56, 85, 83, 0.5);
+    --fbfc: rgba(56, 85, 83, 0.7);
     /* Fondo numero igual al seleccionado */
-    --fn: rgba(56, 85, 83, 0.8);
+    --fn: rgba(56, 85, 83, 0.9);
 }
 
 .light {
