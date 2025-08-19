@@ -4,7 +4,7 @@ import { generarTableroResultado } from '../../utils/generarTableroResultado';
 import { generarTableroInicial, unaSolucion } from '../../utils/generarTableroInicial';
 import { useTableroContext, useControlesContext } from '../../context/TableroProvider';
 
-function Controles() {
+function Controles({ tema, setTema, setDark }) {
     // Importamos las variables de contexto
     const {
         tableroInicial,
@@ -22,8 +22,6 @@ function Controles() {
 
     // Creamos un nuevo tablero
     function handleNuevo(e) {
-        e.stopPropagation();
-        e.preventDefault();
 
         const nuevoTableroResuldado = generarTableroResultado();
         const nuevoTableroInicial = generarTableroInicial(structuredClone(nuevoTableroResuldado), dificultad);
@@ -61,7 +59,23 @@ function Controles() {
     function handleChange(e) {
         e.stopPropagation();
         e.preventDefault();
+        console.log(e)
         inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad);
+    }
+
+    function handleTema(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        if (tema == 'sistema') {
+            setTema('claro');
+            setDark(false);
+        } else if (tema == 'claro') {
+            setTema('oscuro');
+            setDark(true);
+        } else {
+            setTema('sistema');
+            setDark(window.matchMedia('(prefers-color-scheme: dark)').matches);
+        }
     }
 
     return (
@@ -106,6 +120,9 @@ function Controles() {
                             <span className={solucionUnica ? 'oculto' : 'visible'}>NO</span>
                         </div>
                     </div>
+                </div>
+                <div className='contenedor-tema'>
+                   <button onMouseDown={handleTema} >{`Tema ${tema}`}</button>
                 </div>
             </div>
 

@@ -6,7 +6,16 @@ import Controles from './components/controles/Controles.jsx';
 import { TableroProvider } from './context/TableroProvider.jsx';
 
 function App() {
-    const [darkMode, setDarkMode] = useState(window.matchMedia("(prefers-color-scheme: dark)").matches)
+    // La variable tema determina quien controla el tema, puede ser sistema, claro u oscuro
+    const [tema, setTema] = useState('sistema');
+    // La variable dark controla directamente el tema, depende del sistema o lo que elija el usuario
+    const [dark, setDark] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    // listener para detectar cambio en tema del sistema
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        setDark(e.matches);
+        console.log(`El usuario cambió a modo ${nuevoTema}`);
+    });
 
     function handleMouseDown(e) {
         if (!(e.target.id == 'dificultad')) {
@@ -14,34 +23,14 @@ function App() {
         }
     }
 
-    function handleChangeDarkMode(e) {
-        if (darkMode) {
-            setDarkMode(false);
-        } else {
-            setDarkMode(true);
-        }
-    }
-
     return (
         <>
-            <div className={darkMode ? 'fondo dark' : 'fondo light'} onMouseDown={handleMouseDown} >
+            <div className={dark ? 'fondo dark' : 'fondo light'} onMouseDown={handleMouseDown} >
                 <TableroProvider>
                     <Tablero />
-                    <Controles />
+                    <Controles tema={tema} setTema={setTema} setDark={setDark} />
                 </TableroProvider>
-                <div className='dark-mode-toggle-switch'>
-                    <span className='dark-switch-text'>dark mode</span>
-                    <div>
-                        <label className="toggle-switch">
-                        <input 
-                        type="checkbox" 
-                        checked={darkMode}
-                        onChange={handleChangeDarkMode}
-                        />
-                        <span className="slider"></span>
-                    </label>
-                    </div>
-                </div>
+
             </div>
         </>
     )
