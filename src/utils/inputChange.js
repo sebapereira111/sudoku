@@ -1,7 +1,23 @@
+function borrarTecla(input, tableroActual, teclado, setTeclado, boxSeleccionado, valor) {
+    const tecladoTemporal = structuredClone(teclado);
+    if (valor) {
+        tecladoTemporal[valor-1] = valor;
+    }
+    const tempTableroActual = structuredClone(tableroActual);
+    tempTableroActual[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
+    const cantidad = tempTableroActual.flat(3).filter((item) => item == (+input)).length;
+    console.log(teclado)
+    console.log(cantidad)
+    if (cantidad > 7) {
+        tecladoTemporal[+input - 1] = 0;
+    }
+    setTeclado(tecladoTemporal);
+}
+
 // Se encaraga de actualizar el valor en el box seleccionado (con foco)
 // Primero filtra solo los valores validos y actualiza el tablero actual correspondientemente
 // Luego actualiza el valor de box seleccionado
-function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad) {
+function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad, teclado, setTeclado) {
     // Se filtra el tipo de entrada
     if (!(e.type == 'keydown' || e.type == 'mousedown' || e.type == 'change')) {
         return
@@ -116,16 +132,23 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
 
     // Si es borrar se borra el box seleccionado
     if (esBorrar) {
+        // Se borran los apuntes
         setApuntes((prev) => {
             const newArr = structuredClone(prev);
             newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
             return newArr;
         });
+        // Se borra el valor del box
         setTableroActual((prev => {
             const newArr = structuredClone(prev);
             newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
             return newArr
         }));
+        // Si en el teclado se habia deshabilitado, se vuelve a habilitar esa tecla
+        // falta arreglar para que solo rehabilite, ahora siempre sobreescribe
+        const newTeclado = teclado;
+        newTeclado[valor-1] = valor;
+        setTeclado(newTeclado);
         return
     }
 
@@ -153,14 +176,19 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
                 });
             }
         } else {
-            setTableroActual((prev => {
-                const newArr = structuredClone(prev);
-                newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = +input;
-                return newArr
-            }));
+            if (teclado[+input-1]) {
+                setTableroActual((prev => {
+                    const newArr = structuredClone(prev);
+                    newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = +input;
+                    return newArr
+                }));
+                console.log(teclado)
+                borrarTecla(input, tableroActual, teclado, setTeclado, boxSeleccionado, valor);
+            }
         }
         return
     }
 }
 
 export { inputChange }
+

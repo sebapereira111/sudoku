@@ -16,7 +16,8 @@ function TableroProvider({ children }) {
         apuntesActivados, setApuntesActivados,
         apuntes, setApuntes,
         dificultad, setDificultad,
-        solucionUnica, setSolucionUnica
+        solucionUnica, setSolucionUnica,
+        teclado, setTeclado
     } = useTablero();
 
     // Las variables que se van a pasar a los 2 contextos
@@ -25,13 +26,15 @@ function TableroProvider({ children }) {
         tableroActual, setTableroActual,
         boxSeleccionado, setBoxSeleccionado,
         apuntesActivados, setApuntesActivados,
-        apuntes, setApuntes
+        apuntes, setApuntes, 
+        teclado, setTeclado,
+        setDificultad
     };
 
     const valueControles = {
         tableroResultado, setTableroResultado,
         setTableroInicial,
-        dificultad, setDificultad,
+        dificultad,
         solucionUnica, setSolucionUnica
     };
 

@@ -11,12 +11,14 @@ function Controles({ tema, setTema, setDark }) {
         tableroActual, setTableroActual,
         boxSeleccionado, setBoxSeleccionado,
         apuntesActivados, setApuntesActivados,
-        apuntes, setApuntes
+        apuntes, setApuntes,
+        teclado, setTeclado,
+        setDificultad
     } = useTableroContext();
     const {
         tableroResultado, setTableroResultado,
         setTableroInicial,
-        dificultad, setDificultad,
+        dificultad,
         solucionUnica, setSolucionUnica
     } = useControlesContext();
 
@@ -60,7 +62,7 @@ function Controles({ tema, setTema, setDark }) {
         e.stopPropagation();
         e.preventDefault();
         console.log(e)
-        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad);
+        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad, teclado, setTeclado);
     }
 
     function handleTema(e) {
@@ -96,7 +98,7 @@ function Controles({ tema, setTema, setDark }) {
                     </div>
                     <div className='contenedor-teclado'>
                         {/* Genera un array de 9 elementos button para el teclado */}
-                        {Array.from({ length: 9 }, (_, index) => <button key={1 + index} id={1 + index} title={`Numero ${1 + index}`} className='boton-teclado' onMouseDown={handleChange}>{1 + index}</button> )}
+                        {teclado.map((numero, index) => <button key={1 + index} id={1 + index} title={`Numero ${1 + index}`} className='boton-teclado' onMouseDown={handleChange}>{numero ? numero : " "}</button>)}
                     </div>
 
                 </div>

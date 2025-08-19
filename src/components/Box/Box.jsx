@@ -10,7 +10,9 @@ function Box({ filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex }) {
         tableroActual, setTableroActual,
         boxSeleccionado, setBoxSeleccionado,
         apuntesActivados, setApuntesActivados,
-        apuntes, setApuntes
+        apuntes, setApuntes, 
+        teclado, setTeclado,
+        setDificultad
      } = useTableroContext();
 
     // El valor del box, solo para no tener que esctibir todo cada vez
@@ -33,7 +35,7 @@ function Box({ filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex }) {
     // Primero filtra solo los valores validos y actualiza el tablero actual correspondientemente
     // Luego actualiza el valor de box seleccionado
     function handleKeyDown(e) {
-        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes);
+        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad, teclado, setTeclado);
     }
 
     // Se encarga de mostrar los apuntes en el box si ese box esta en cero
