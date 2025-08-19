@@ -41,7 +41,6 @@ function App() {
                         <span className="slider"></span>
                     </label>
                     </div>
-                    
                 </div>
             </div>
         </>

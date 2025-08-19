@@ -14,10 +14,6 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
     // Si es el slider de dificultad
     if (esDificultad) {
         setDificultad(Number(e.target.value));
-        if (!(boxSeleccionado.filaBloqueIndex == 3)) {
-            const elementoEnFoco = document.getElementById(boxSeleccionado.filaBloqueIndex+'-'+boxSeleccionado.colBloqueIndex+'-'+boxSeleccionado.filaBoxIndex+'-'+boxSeleccionado.colBoxIndex);
-            elementoEnFoco.focus();
-        }
         return
     }
     

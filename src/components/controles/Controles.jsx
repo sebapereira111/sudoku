@@ -53,6 +53,11 @@ function Controles() {
         
     } 
 
+    function handleSliderClick(e) {
+        const elementoEnFoco = document.getElementById(boxSeleccionado.filaBloqueIndex+'-'+boxSeleccionado.colBloqueIndex+'-'+boxSeleccionado.filaBoxIndex+'-'+boxSeleccionado.colBoxIndex);
+        elementoEnFoco.focus();
+    }
+
     function handleChange(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -93,6 +98,7 @@ function Controles() {
                             max="60"
                             value={dificultad}
                             onChange={handleChange}
+                            onClick={handleSliderClick}
                             step="1" />
                         <div className='solucion-unica'>
                             <span>Solucion unica:</span>&nbsp;
