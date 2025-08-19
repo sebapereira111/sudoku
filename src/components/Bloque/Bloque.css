@@ -9,4 +9,6 @@
     border-style: solid;
     border-color: var(--text);
     border-width: 1px;
+    /* Color de fondo */
+    background-color: white;
 }

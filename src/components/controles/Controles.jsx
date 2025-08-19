@@ -66,15 +66,22 @@ function Controles({ tema, setTema, setDark }) {
     function handleTema(e) {
         e.stopPropagation();
         e.preventDefault();
+        // El tema se va rotando
         if (tema == 'sistema') {
+            // Si tema es sistema, se cambia a claro y se guarda para el proximo reinicio
             setTema('claro');
             setDark(false);
+            localStorage.setItem('temaGuardado', 'claro');
         } else if (tema == 'claro') {
+            // Si el tema es claro, se cambia a oscuro y se guarda para el proximo reinicio
             setTema('oscuro');
             setDark(true);
+            localStorage.setItem('temaGuardado', 'oscuro');
         } else {
+            // Si el tema depende del sistema, se lee el valor actual y se elimina lo guardado para el proximo reinicio (null en guardado es sistema)
             setTema('sistema');
             setDark(window.matchMedia('(prefers-color-scheme: dark)').matches);
+            localStorage.removeItem('temaGuardado')
         }
     }
 

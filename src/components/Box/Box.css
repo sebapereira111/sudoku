@@ -33,7 +33,7 @@
 }
 
 .texto-azul {
-    color: rgb(83, 83, 223);
+    color: var(--text-azul);
 }
 
 .fondo-general {
@@ -41,27 +41,27 @@
 }
 
 .fondo-seleccionado {
-    background-color: rgba(31, 173, 163, 1);
+    background-color: var(--fs);
 }
 
 .fondo-invalido {
-    background-color: rgba(255, 0, 0, 0.369);
+    background-color: var(--fi);
 }
 
 .fondo-bloque {
-    background-color: rgba(31, 173, 163, 0.25);
+    background-color: var(--fbfc);
 }
 
 .fondo-fila {
-    background-color: rgba(31, 173, 163, 0.25);
+    background-color: var(--fbfc);
 }
 
 .fondo-columna {
-    background-color: rgba(31, 173, 163, 0.25);
+    background-color: var(--fbfc);
 }
 
 .fondo-numero {
-    background-color: rgba(33, 173, 164, 0.5);
+    background-color: var(--fn);
 }
 
 .box-apuntes {
