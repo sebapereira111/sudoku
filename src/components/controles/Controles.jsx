@@ -61,7 +61,6 @@ function Controles({ tema, setTema, setDark }) {
     function handleChange(e) {
         e.stopPropagation();
         e.preventDefault();
-        console.log(e)
         inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad, teclado, setTeclado);
     }
 
