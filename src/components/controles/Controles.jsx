@@ -1,5 +1,5 @@
 import './Controles.css'
-import { inputChange } from '../../utils/inputChange';
+import { inputChange, resetTeclado } from '../../utils/inputChange';
 import { generarTableroResultado } from '../../utils/generarTableroResultado';
 import { generarTableroInicial, unaSolucion } from '../../utils/generarTableroInicial';
 import { useTableroContext, useControlesContext } from '../../context/TableroProvider';
@@ -51,6 +51,8 @@ function Controles({ tema, setTema, setDark }) {
         const soloUnaSolucion = unaSolucion(nuevoTableroInicial, dificultad);
         setSolucionUnica(soloUnaSolucion);
         
+        // Por ultimo se resetea el teclado
+        resetTeclado(nuevoTableroInicial, setTeclado);
     } 
 
     function handleSliderClick(e) {
