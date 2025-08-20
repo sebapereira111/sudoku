@@ -10,7 +10,7 @@
 - Mostrar tiempo de juego. 
 - Ordenar/agrupar variables/props. ✅
 - Comentar codigo. 
-- Cuando se completa un numero desaparece del teclado. 
+- Cuando se completa un numero desaparece del teclado. ✅ (se puede mejorar)
 - Desaparecer apunte al cargar valor en la misma fila/bloque ?
 - Detectar cuando se completa el tablero
 
