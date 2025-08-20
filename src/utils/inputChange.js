@@ -161,6 +161,9 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
                     newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
                     return newArr
                 }));
+                const newTeclado = teclado;
+                newTeclado[valor-1] = valor;
+                setTeclado(newTeclado);
             }
             if (+input == apuntes[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex][+input - 1]) {
                 setApuntes((prev) => {
