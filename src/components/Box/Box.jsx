@@ -6,13 +6,15 @@ import { useTableroContext } from '../../context/TableroProvider.jsx'
 function Box({ filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex }) {
     // importamos las variables de contexto
     const { 
+        tableroResultado,
         tableroInicial,
         tableroActual, setTableroActual,
         boxSeleccionado, setBoxSeleccionado,
         apuntesActivados, setApuntesActivados,
         apuntes, setApuntes, 
         teclado, setTeclado,
-        setDificultad
+        setDificultad,
+        solucionUnica
      } = useTableroContext();
 
     // El valor del box, solo para no tener que esctibir todo cada vez

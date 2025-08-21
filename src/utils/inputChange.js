@@ -163,6 +163,22 @@ function actualizarTablero(boxSeleccionado, setTableroActual, tableroActual, tec
     borrarTecla(input, tableroActual, teclado, setTeclado, boxSeleccionado, valor);
 }
 
+// Compara el tablero resultado con el tablero actual
+function tableroCompleto(tableroActual, tableroResultado) {
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            for (let k = 0; k < 3; k++) {
+                for (let l = 0; l < 3; l++) {
+                    if (!(tableroActual[i][j][k][l] == tableroResultado[i][j][k][l])) {
+                        return false
+                    }
+                }
+            }
+        }
+    }
+    return true
+}
+
 ///////////////////////////////////////////////////////////////////////
 // Desde aqui va la funcion inputChange que controla las entradas
 ///////////////////////////////////////////////////////////////////////
@@ -270,4 +286,4 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
     }
 }
 
-export { inputChange, resetTeclado }
+export { inputChange, resetTeclado, tableroCompleto }

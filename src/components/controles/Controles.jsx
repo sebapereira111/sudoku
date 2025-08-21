@@ -1,26 +1,39 @@
 import './Controles.css'
-import { inputChange, resetTeclado } from '../../utils/inputChange';
+import { inputChange, resetTeclado, tableroCompleto } from '../../utils/inputChange';
 import { generarTableroResultado } from '../../utils/generarTableroResultado';
 import { generarTableroInicial, unaSolucion } from '../../utils/generarTableroInicial';
 import { useTableroContext, useControlesContext } from '../../context/TableroProvider';
+import { useEffect } from 'react';
 
-function Controles({ tema, setTema, setDark }) {
+function Controles({ tema, setTema, setDark, setCompletado }) {
     // Importamos las variables de contexto
     const {
+        tableroResultado,
         tableroInicial,
         tableroActual, setTableroActual,
         boxSeleccionado, setBoxSeleccionado,
         apuntesActivados, setApuntesActivados,
         apuntes, setApuntes,
         teclado, setTeclado,
-        setDificultad
+        setDificultad,
+        solucionUnica
     } = useTableroContext();
     const {
-        tableroResultado, setTableroResultado,
+        setTableroResultado,
         setTableroInicial,
         dificultad,
-        solucionUnica, setSolucionUnica
+        setSolucionUnica
     } = useControlesContext();
+
+    useEffect(() => {
+        if (tableroActual[0][0][0][0]) {
+            if (solucionUnica) {
+                if (tableroCompleto(tableroActual, tableroResultado)) {
+                    setCompletado(true);
+                }
+            }
+        }
+    }, [tableroActual]);
 
     // Creamos un nuevo tablero
     function handleNuevo(e) {
@@ -53,6 +66,7 @@ function Controles({ tema, setTema, setDark }) {
         
         // Por ultimo se resetea el teclado
         resetTeclado(nuevoTableroInicial, setTeclado);
+        setCompletado(false);
     } 
 
     function handleSliderClick(e) {

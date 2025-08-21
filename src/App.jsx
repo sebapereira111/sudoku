@@ -35,6 +35,7 @@ function App() {
         setDark(e.matches);
     }
 
+    // Para iniciar o remover el listener del tema de sistema
     useEffect(() => {
         if (tema === 'sistema') {
             mediaQuery.addEventListener('change', cambiarTemaSistema);
@@ -51,12 +52,22 @@ function App() {
         }
     }
 
+    // Mensaje cuando se completa un tablero unico
+    // La varible cambia a true cuando se completa el teclado (en Controles)
+    const [completado, setCompletado] = useState(false);
+    useEffect(() => {
+        // El efecto solo se ejecuta cuando cambia completado, y el mensaje se muestra solo cuando es true
+        if (completado) {
+            confirm("Tablero completado. Felicidades!");
+        }
+    }, [completado]);
+
     return (
         <>
             <div className={dark ? 'fondo dark' : 'fondo light'} onMouseDown={handleMouseDown} >
                 <TableroProvider>
                     <Tablero />
-                    <Controles tema={tema} setTema={setTema} setDark={setDark} />
+                    <Controles tema={tema} setTema={setTema} setDark={setDark} setCompletado={setCompletado}/>
                 </TableroProvider>
 
             </div>

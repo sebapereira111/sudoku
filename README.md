@@ -5,14 +5,14 @@
 - Modo oscuro/claro. ✅ (se puede mejorar)
 - Mostrar/elegir si el tablero es unico.
 - Bloqueo de pantalla mientras genera nuevo juego. 
-- Mejorar y ordenar logica de controles. Separar en funciones. 
+- Mejorar y ordenar logica de controles. Separar en funciones. ✅
 - Mostrar Reglas. 
 - Mostrar tiempo de juego. 
 - Ordenar/agrupar variables/props. ✅
 - Comentar codigo. 
-- Cuando se completa un numero desaparece del teclado. ✅ (se puede mejorar)
+- Cuando se completa un numero desaparece del teclado. ✅
 - Desaparecer apunte al cargar valor en la misma fila/bloque ?
-- Detectar cuando se completa el tablero
+- Detectar cuando se completa el tablero ✅
 
 Los pendientes no estan en orden de prioridad
 

@@ -22,20 +22,22 @@ function TableroProvider({ children }) {
 
     // Las variables que se van a pasar a los 2 contextos
     const valueTablero = {
+        tableroResultado,
         tableroInicial,
         tableroActual, setTableroActual,
         boxSeleccionado, setBoxSeleccionado,
         apuntesActivados, setApuntesActivados,
         apuntes, setApuntes, 
         teclado, setTeclado,
-        setDificultad
+        setDificultad,
+        solucionUnica
     };
 
     const valueControles = {
-        tableroResultado, setTableroResultado,
+        setTableroResultado,
         setTableroInicial,
         dificultad,
-        solucionUnica, setSolucionUnica
+        setSolucionUnica
     };
 
     return (
