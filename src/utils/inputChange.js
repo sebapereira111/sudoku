@@ -1,28 +1,3 @@
-function borrarTecla(input, tableroActual, teclado, setTeclado, boxSeleccionado, valor) {
-    const tecladoTemporal = structuredClone(teclado);
-    if (valor) {
-        tecladoTemporal[valor-1] = valor;
-    }
-    const tempTableroActual = structuredClone(tableroActual);
-    tempTableroActual[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
-    const cantidad = tempTableroActual.flat(3).filter((item) => item == (+input)).length;
-    if (cantidad > 7) {
-        tecladoTemporal[+input - 1] = 0;
-    }
-    setTeclado(tecladoTemporal);
-}
-
-
-
-
-
-
-
-
-
-
-
-
 // Funcion que resetea el teclado
 // Revisa el tablero recibido y de acuerdo a eso habilita las teclas
 // Se usa cuando se resetea el tablero o con tablero nuevo
@@ -115,6 +90,17 @@ function moverSeleccionado(boxSeleccionado, setBoxSeleccionado, input) {
     elementoEnFoco.focus();
 }
 
+// Si en el teclado se habia deshabilitado, se vuelve a habilitar esa tecla
+function habilitarTecla(teclado, setTeclado, valor) {
+    // Primero comprobamos si hay un valor en el box y si el teclado esta deshabilitado ese valor
+    if (valor && (teclado[valor-1] == 0)) {
+        // De cumplirser, rehabilitamos esa tecla
+        const newTeclado = teclado;
+        newTeclado[valor-1] = valor;
+        setTeclado(newTeclado);
+    }
+}
+
 // Funcion que borra el box seleccionado
 function borrarBox(boxSeleccionado, setTableroActual, setApuntes, teclado, setTeclado, valor) {
     // Se borran los apuntes
@@ -129,12 +115,57 @@ function borrarBox(boxSeleccionado, setTableroActual, setApuntes, teclado, setTe
         newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
         return newArr
     }));
-    // Si en el teclado se habia deshabilitado, se vuelve a habilitar esa tecla
-    // falta arreglar para que solo rehabilite, ahora siempre sobreescribe
-    const newTeclado = teclado;
-    newTeclado[valor-1] = valor;
-    setTeclado(newTeclado);
+    habilitarTecla(teclado, setTeclado, valor)
 }
+
+// Actualiza el valor de los apuntes
+function actualizarApuntes(boxSeleccionado, apuntes, setApuntes, input) {
+    // Vemos si el valor de apuntes correspondiente al input esta activado
+    if (apuntes[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex][input - 1]) {
+        // Si ya estaba activado se borra (se pone 0)
+        setApuntes((prev) => {
+            const newArr = structuredClone(prev);
+            newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex][input - 1] = 0;
+            return newArr;
+        });
+    } else {
+        // De lo contrario se carga el valor ingresado en apuntes
+        setApuntes((prev) => {
+            const newArr = structuredClone(prev);
+            newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex][input - 1] = input;
+            return newArr;
+        });
+    }
+}
+
+// Borra la tecla del teclado si ya tenemos el valor 9 veces en el tablero
+function borrarTecla(input, tableroActual, teclado, setTeclado, boxSeleccionado, valor) {
+    const tecladoTemporal = structuredClone(teclado);
+    if (valor) {
+        tecladoTemporal[valor-1] = valor;
+    }
+    const tempTableroActual = structuredClone(tableroActual);
+    tempTableroActual[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
+    const cantidad = tempTableroActual.flat(3).filter((item) => item == (+input)).length;
+    if (cantidad > 7) {
+        tecladoTemporal[+input - 1] = 0;
+    }
+    setTeclado(tecladoTemporal);
+}
+
+// Actualiza el valor del tablero
+function actualizarTablero(boxSeleccionado, setTableroActual, tableroActual, teclado, setTeclado, valor, input) {
+    setTableroActual((prev => {
+        const newArr = structuredClone(prev);
+        newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = input;
+        return newArr
+    }));
+    borrarTecla(input, tableroActual, teclado, setTeclado, boxSeleccionado, valor);
+}
+
+///////////////////////////////////////////////////////////////////////
+// Desde aqui va la funcion inputChange que controla las entradas
+///////////////////////////////////////////////////////////////////////
 
 // inputChange recibe un evento y los parametros. 
 // Dependiendo del evento recibido redirecciona a la funcion correspondiente
@@ -146,10 +177,8 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
     
     // Se carga el valor ingresado a una variable temporal
     const tempInput = (e.type == 'keydown') ? e.key : e.target.id
-    // Si el valor ingresado (de la variable temporal) es un numero se pasa de texto a numero
+    // Si el valor ingresado (ya en la variable temporal) es un numero se pasa de texto a numero
     const input = /^[0-9]$/.test(tempInput) ? +tempInput : tempInput
-  
-    console.log(input)
 
     // Se crean variables de acuerdo al valor ingresado para discriminar mas facil
     // Con estos valores se llama a la funcion correspondiente
@@ -162,7 +191,7 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
     
     ///////////////////////////////////////////////////////////////////////
     // Desde aqui se determina la entrada y que hay que hacer en cada caso
-    //////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
     
     // Si es el slider de dificultad, se ajusta el slider al valor seleccionado
     if (esDificultad) {
@@ -190,80 +219,54 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
     // Se retorna sin hacer nada en ese caso
     if (boxSeleccionado.filaBloqueIndex == 3) {
         return
-    }
+    } else {
+        // En caso contrario, tiene que haber algun box seleccionado, su valor se carga para facil acceso
+        const valor = tableroActual[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex];
+        
+        // Si se pulso alguna flecha, se llama la funcion para mover el box seleccionado
+        if(esFlecha) {
+            moverSeleccionado(boxSeleccionado, setBoxSeleccionado, input);
+            return
+        }
 
-    // En caso contrario, tiene que haber algun box seleccionado, su valor se carga para facil acceso
-    const valor = tableroActual[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex];
-    
-    // Si se pulso alguna flecha, se llama la funcion para mover el box seleccionado
-    if(esFlecha) {
-        moverSeleccionado(boxSeleccionado, setBoxSeleccionado, input);
-        return
-    }
-
-    // Si el box seleccionado es no modificable (numero con texto negro, del tablero inicial) no se hace nada
-    // estas lineas tienen que estar antes de los que modifican el tablero
-    if (tableroInicial[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex]) {
-        return
-    }
-
-    // Si es borrar se llama a la funcion para borrar el box
-    if (esBorrar) {
-        borrarBox(boxSeleccionado, setTableroActual, setApuntes, teclado, setTeclado, valor);
-        return
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    if (esNumero) {
-        if (apuntesActivados) {
-            // Si apuntes esta activado primero borra el valor que habia en el box si habia algo
-            if (valor) {
-                setTableroActual((prev => {
-                    const newArr = structuredClone(prev);
-                    newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
-                    return newArr
-                }));
-                const newTeclado = teclado;
-                newTeclado[valor-1] = valor;
-                setTeclado(newTeclado);
-            }
-            if (+input == apuntes[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex][+input - 1]) {
-                setApuntes((prev) => {
-                    const newArr = structuredClone(prev);
-                    newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex][+input - 1] = 0;
-                    return newArr;
-                });
-            } else {
-                setApuntes((prev) => {
-                    const newArr = structuredClone(prev);
-                    newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex][+input - 1] = +input;
-                    return newArr;
-                });
-            }
+        // Si el box seleccionado es no modificable (numero con texto negro, del tablero inicial)
+        // No se puede borrar o cambiar el numero
+        if (tableroInicial[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex]) {
+            return
         } else {
-            if (teclado[+input-1]) {
-                setTableroActual((prev => {
-                    const newArr = structuredClone(prev);
-                    newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = +input;
-                    return newArr
-                }));
-                borrarTecla(input, tableroActual, teclado, setTeclado, boxSeleccionado, valor);
+            // De lo contrario si se puede modificar el box
+            // Si es borrar se llama a la funcion para borrar el box
+            if (esBorrar) {
+                borrarBox(boxSeleccionado, setTableroActual, setApuntes, teclado, setTeclado, valor);
+                return
+            }
+
+            // Si es numero, se actualiza el tablero o apuntes, de acuerdo al caso
+            if (esNumero) {
+                // Primero vemos si los apuntes estan activados
+                if (apuntesActivados) {
+                    // Si los apuntes estan activados
+                    // Vemos si hay algo en la posicion seleccionada del tablero
+                    if (valor) {
+                        // Si hay algo:
+                            // Se borra el valor del tablero
+                            // Se actualiza el teclado (dentro de borrar box)
+                        borrarBox(boxSeleccionado, setTableroActual, setApuntes, teclado, setTeclado, valor);
+                    }
+                    // Despues actualizamos el apunte
+                    actualizarApuntes(boxSeleccionado, apuntes, setApuntes, input);
+                } else {
+                    // Si los apuntes no estan activado
+                    // Se comprueba si la tecla esta activada
+                    if (teclado[input-1]) {
+                        // Si esta activada la tecla se actualiza el tablero
+                        // Tambien se actualiza el teclado desde actualizar tablero
+                        actualizarTablero(boxSeleccionado, setTableroActual, tableroActual, teclado, setTeclado, valor, input);
+                    }
+                }
+                return
             }
         }
-        return
     }
 }
 
