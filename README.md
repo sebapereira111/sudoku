@@ -7,7 +7,7 @@
 - Bloqueo de pantalla mientras genera nuevo juego. 
 - Mejorar y ordenar logica de controles. Separar en funciones. ✅
 - Mostrar Reglas. 
-- Mostrar tiempo de juego. 
+- Mostrar tiempo de juego. ✅
 - Ordenar/agrupar variables/props. ✅
 - Comentar codigo. 
 - Cuando se completa un numero desaparece del teclado. ✅

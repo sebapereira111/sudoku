@@ -14,7 +14,7 @@ function resetTeclado(tablero, setTeclado) {
 }
 
 // Funcion que resetea el tablero
-function resetTablero(tableroInicial, setBoxSeleccionado, setTableroActual, setApuntesActivados, setApuntes, setTeclado) {
+function resetTablero(tableroInicial, setBoxSeleccionado, setTableroActual, setApuntesActivados, setApuntes, setTeclado, setTiempo, setContando) {
     // El tablero de trabajo se establece en el inicial
     setTableroActual(structuredClone(tableroInicial));
     // Se borran los apuntes
@@ -35,6 +35,8 @@ function resetTablero(tableroInicial, setBoxSeleccionado, setTableroActual, setA
         colBoxIndex: 0
     });
     resetTeclado(tableroInicial, setTeclado)
+    setTiempo(0);
+    setContando(true);
 }
 
 // Cuando se presionan las flechas para mover el box seleccionado
@@ -164,7 +166,7 @@ function actualizarTablero(boxSeleccionado, setTableroActual, tableroActual, tec
 }
 
 // Compara el tablero resultado con el tablero actual
-function tableroCompleto(tableroActual, tableroResultado) {
+function tableroCompleto(tableroActual, tableroResultado, setContando) {
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             for (let k = 0; k < 3; k++) {
@@ -176,6 +178,7 @@ function tableroCompleto(tableroActual, tableroResultado) {
             }
         }
     }
+    setContando(false);
     return true
 }
 
@@ -185,7 +188,7 @@ function tableroCompleto(tableroActual, tableroResultado) {
 
 // inputChange recibe un evento y los parametros. 
 // Dependiendo del evento recibido redirecciona a la funcion correspondiente
-function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad, teclado, setTeclado) {
+function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad, teclado, setTeclado, setTiempo, setContando) {
     // Se filtra solo los eventos que son manejados por la funcion
     if (!(e.type == 'keydown' || e.type == 'mousedown' || e.type == 'change')) {
         return
@@ -217,7 +220,7 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
 
     // Si se presiona r o R o tecla reset, se llama la funcion para resetear el tablero
     if (esReset) {
-        resetTablero(tableroInicial, setBoxSeleccionado, setTableroActual, setApuntesActivados, setApuntes, setTeclado);
+        resetTablero(tableroInicial, setBoxSeleccionado, setTableroActual, setApuntesActivados, setApuntes, setTeclado, setTiempo, setContando);
         return
     }
 

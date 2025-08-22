@@ -35,6 +35,9 @@ function useTablero() {
     // Selecciona/avisa si el nuevo tablero debe ser de solucion unica
     const [solucionUnica, setSolucionUnica] = useState(true);
     const [teclado, setTeclado] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    // Variables del cronometro
+    const [tiempo, setTiempo] = useState(0);
+    const [contando, setContando] = useState(false);
 
     return {
         tableroResultado, setTableroResultado,
@@ -45,7 +48,9 @@ function useTablero() {
         apuntes, setApuntes,
         dificultad, setDificultad,
         solucionUnica, setSolucionUnica,
-        teclado, setTeclado
+        teclado, setTeclado,
+        tiempo, setTiempo,
+        contando, setContando
     };
 }
 

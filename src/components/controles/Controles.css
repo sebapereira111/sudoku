@@ -28,6 +28,13 @@
     background-color: rgba(31, 173, 163, 0.75);
 }
 
+.contenedor-teclado-y-cronometro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
 .contenedor-teclado {
     display: grid;
     grid-template-columns: repeat(3, auto);

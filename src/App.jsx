@@ -69,7 +69,6 @@ function App() {
                     <Tablero />
                     <Controles tema={tema} setTema={setTema} setDark={setDark} setCompletado={setCompletado}/>
                 </TableroProvider>
-
             </div>
         </>
     )

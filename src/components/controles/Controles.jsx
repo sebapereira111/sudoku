@@ -4,6 +4,7 @@ import { generarTableroResultado } from '../../utils/generarTableroResultado';
 import { generarTableroInicial, unaSolucion } from '../../utils/generarTableroInicial';
 import { useTableroContext, useControlesContext } from '../../context/TableroProvider';
 import { useEffect } from 'react';
+import { Cronometro } from './Cronometro/Cronometro';
 
 function Controles({ tema, setTema, setDark, setCompletado }) {
     // Importamos las variables de contexto
@@ -16,7 +17,9 @@ function Controles({ tema, setTema, setDark, setCompletado }) {
         apuntes, setApuntes,
         teclado, setTeclado,
         setDificultad,
-        solucionUnica
+        solucionUnica,
+        tiempo, setTiempo,
+        contando, setContando
     } = useTableroContext();
     const {
         setTableroResultado,
@@ -28,7 +31,7 @@ function Controles({ tema, setTema, setDark, setCompletado }) {
     useEffect(() => {
         if (tableroActual[0][0][0][0]) {
             if (solucionUnica) {
-                if (tableroCompleto(tableroActual, tableroResultado)) {
+                if (tableroCompleto(tableroActual, tableroResultado, setContando)) {
                     setCompletado(true);
                 }
             }
@@ -67,6 +70,8 @@ function Controles({ tema, setTema, setDark, setCompletado }) {
         // Por ultimo se resetea el teclado
         resetTeclado(nuevoTableroInicial, setTeclado);
         setCompletado(false);
+        setTiempo(0);
+        setContando(true);
     } 
 
     function handleSliderClick(e) {
@@ -77,7 +82,7 @@ function Controles({ tema, setTema, setDark, setCompletado }) {
     function handleChange(e) {
         e.stopPropagation();
         e.preventDefault();
-        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad, teclado, setTeclado);
+        inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad, teclado, setTeclado, setTiempo, setContando);
     }
 
     function handleTema(e) {
@@ -111,11 +116,13 @@ function Controles({ tema, setTema, setDark, setCompletado }) {
                         <button title='Borrar celda' id='borrar' className='boton-utilidades' onMouseDown={handleChange}>↩</button>
                         <button title='Apuntes' id='apuntes' className={apuntesActivados ? 'boton-utilidades apuntes-activados' : 'boton-utilidades' } onMouseDown={handleChange} >✎</button>    
                     </div>
-                    <div className='contenedor-teclado'>
-                        {/* Genera un array de 9 elementos button para el teclado */}
-                        {teclado.map((numero, index) => <button key={1 + index} id={1 + index} title={`Numero ${1 + index}`} className='boton-teclado' onMouseDown={handleChange}>{numero ? numero : " "}</button>)}
+                    <div className='contenedor-teclado-y-cronometro'>
+                        <Cronometro tiempo={tiempo} contando={contando} />
+                        <div className='contenedor-teclado'>
+                            {/* Genera un array de 9 elementos button para el teclado */}
+                            {teclado.map((numero, index) => <button key={1 + index} id={1 + index} title={`Numero ${1 + index}`} className='boton-teclado' onMouseDown={handleChange}>{numero ? numero : " "}</button>)}
+                        </div>
                     </div>
-
                 </div>
                 <div className='contenedor-nuevo-juego'>
                     <div className='contenedor-boton-nuevo-juego' >
