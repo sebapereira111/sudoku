@@ -29,19 +29,13 @@ function Cronometro() {
         }
     }, [contando])
 
-    // Logica para iniciar/pausar/reiniciar cronometro al pulsar por el
-    function handleCronometro() {
-        if ((contando == false) && (tiempo == 0)) {
-            // iniciar
-            setContando(true);
-        } else if ((contando == true) && (tiempo > 0)) {
-            // pausar
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
             setContando(false);
-        } else if ((contando == false) && (tiempo > 0)) {
-            // reiniciar
+        } else if (tiempo) {
             setContando(true);
         }
-    }
+    });
 
     // Calculamos las variables que vamos a mostrar 
     const segundos = (tiempo%60).toString().padStart(2,"0");
@@ -51,7 +45,7 @@ function Cronometro() {
     return (
         <>
             <div className='contenedor-cronometro'>
-                <span onMouseDown={handleCronometro} className='cronometro-texto'>{`${horas}:${minutos}:${segundos}`}</span>
+                <span className='cronometro-texto'>{`${horas}:${minutos}:${segundos}`}</span>
             </div>
         </>
     )
