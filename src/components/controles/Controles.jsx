@@ -6,7 +6,7 @@ import { useTableroContext, useControlesContext } from '../../context/TableroPro
 import { useEffect } from 'react';
 import { Cronometro } from './Cronometro/Cronometro';
 
-function Controles({ tema, setTema, setDark, setCompletado }) {
+function Controles({ tema, setTema, setDark, completado, setCompletado }) {
     // Importamos las variables de contexto
     const {
         tableroResultado,
@@ -112,7 +112,7 @@ function Controles({ tema, setTema, setDark, setCompletado }) {
                         <button title='Apuntes' id='apuntes' className={apuntesActivados ? 'boton-utilidades apuntes-activados' : 'boton-utilidades' } onMouseDown={handleChange} >✎</button>    
                     </div>
                     <div className='contenedor-teclado-y-cronometro'>
-                        <Cronometro tiempo={tiempo} contando={contando} />
+                        <Cronometro completado={completado} />
                         <div className='contenedor-teclado'>
                             {/* Genera un array de 9 elementos button para el teclado */}
                             {teclado.map((numero, index) => <button key={1 + index} id={1 + index} title={`Numero ${1 + index}`} className='boton-teclado' onMouseDown={handleChange}>{numero ? numero : " "}</button>)}

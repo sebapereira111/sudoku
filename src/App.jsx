@@ -58,7 +58,7 @@ function App() {
     useEffect(() => {
         // El efecto solo se ejecuta cuando cambia completado, y el mensaje se muestra solo cuando es true
         if (completado) {
-            confirm("Tablero completado. Felicidades!");
+            alert("Tablero completado. Felicidades!");
         }
     }, [completado]);
 
@@ -67,7 +67,7 @@ function App() {
             <div className={dark ? 'fondo dark' : 'fondo light'} onMouseDown={handleMouseDown} >
                 <TableroProvider>
                     <Tablero />
-                    <Controles tema={tema} setTema={setTema} setDark={setDark} setCompletado={setCompletado}/>
+                    <Controles tema={tema} setTema={setTema} setDark={setDark} completado={completado} setCompletado={setCompletado}/>
                 </TableroProvider>
             </div>
         </>

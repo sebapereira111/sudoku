@@ -13,6 +13,7 @@
 - Cuando se completa un numero desaparece del teclado. ✅
 - Desaparecer apunte al cargar valor en la misma fila/bloque ?
 - Detectar cuando se completa el tablero ✅
+- Responsividad para tablet/celular
 
 Los pendientes no estan en orden de prioridad
 

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useTableroContext } from '../../../context/TableroProvider';
 import './Cronometro.css'
 
-function Cronometro() {
+function Cronometro({ completado }) {
     // importamos las variables de contexto que vamos a usar
     // tiempo se incrementa cada 1 segundo para llevar la cuenta
     // contando es una flag que solo avisa si esta funcionando el contador
@@ -29,13 +29,26 @@ function Cronometro() {
         }
     }, [contando])
 
-    document.addEventListener("visibilitychange", () => {
+    function visibilidadContador(setContando, tiempo) {
         if (document.hidden) {
             setContando(false);
         } else if (tiempo) {
             setContando(true);
         }
-    });
+    }
+
+    useEffect(() => {
+        const handler = () => {
+            if (document.hidden) {
+                setContando(false);
+            } else if (tiempo && !completado) {
+                setContando(true);
+            }
+        };
+        document.addEventListener("visibilitychange", handler);
+        return () => document.removeEventListener("visibilitychange", handler);
+    }, [contando])
+
 
     // Calculamos las variables que vamos a mostrar 
     const segundos = (tiempo%60).toString().padStart(2,"0");
