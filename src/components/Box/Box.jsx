@@ -14,7 +14,6 @@ function Box({ filaBloqueIndex, colBloqueIndex, filaBoxIndex, colBoxIndex }) {
         apuntes, setApuntes, 
         teclado, setTeclado,
         setDificultad,
-        solucionUnica,
         tiempo, setTiempo,
         contando, setContando
      } = useTableroContext();

@@ -16,7 +16,6 @@ function TableroProvider({ children }) {
         apuntesActivados, setApuntesActivados,
         apuntes, setApuntes,
         dificultad, setDificultad,
-        solucionUnica, setSolucionUnica,
         teclado, setTeclado,
         tiempo, setTiempo,
         contando, setContando
@@ -32,7 +31,6 @@ function TableroProvider({ children }) {
         apuntes, setApuntes, 
         teclado, setTeclado,
         setDificultad,
-        solucionUnica,
         tiempo, setTiempo,
         contando, setContando
     };
@@ -40,8 +38,7 @@ function TableroProvider({ children }) {
     const valueControles = {
         setTableroResultado,
         setTableroInicial,
-        dificultad,
-        setSolucionUnica
+        dificultad
     };
 
     return (

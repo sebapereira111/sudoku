@@ -76,20 +76,18 @@
     width: 100%;
 }
 
-.solucion-unica {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-}
-
 .visible {
     display: inline-block;
 }
 
 .oculto {
     display: none;
+}
+
+.contenedor-otros {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .contenedor-tema {

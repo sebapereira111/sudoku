@@ -32,8 +32,8 @@ function useTablero() {
     ));
     // Dificultad es cuantos boxes se eliminan
     const [dificultad, setDificultad] = useState(45);
-    // Selecciona/avisa si el nuevo tablero debe ser de solucion unica
-    const [solucionUnica, setSolucionUnica] = useState(true);
+    // Variable para la creacion del teclado
+    // Usar esta variable permite hacer desaparecer teclas
     const [teclado, setTeclado] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     // Variables del cronometro
     const [tiempo, setTiempo] = useState(0);
@@ -47,7 +47,6 @@ function useTablero() {
         apuntesActivados, setApuntesActivados,
         apuntes, setApuntes,
         dificultad, setDificultad,
-        solucionUnica, setSolucionUnica,
         teclado, setTeclado,
         tiempo, setTiempo,
         contando, setContando

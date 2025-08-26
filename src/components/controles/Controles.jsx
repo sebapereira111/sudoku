@@ -1,7 +1,7 @@
 import './Controles.css'
 import { inputChange, resetTeclado, tableroCompleto } from '../../utils/inputChange';
 import { generarTableroResultado } from '../../utils/generarTableroResultado';
-import { generarTableroInicial, unaSolucion } from '../../utils/generarTableroInicial';
+import { generarTableroInicial } from '../../utils/generarTableroInicial';
 import { useTableroContext, useControlesContext } from '../../context/TableroProvider';
 import { useEffect } from 'react';
 import { Cronometro } from './Cronometro/Cronometro';
@@ -17,38 +17,37 @@ function Controles({ tema, setTema, setDark, setCompletado }) {
         apuntes, setApuntes,
         teclado, setTeclado,
         setDificultad,
-        solucionUnica,
         tiempo, setTiempo,
         contando, setContando
     } = useTableroContext();
     const {
         setTableroResultado,
         setTableroInicial,
-        dificultad,
-        setSolucionUnica
+        dificultad
     } = useControlesContext();
 
     useEffect(() => {
         if (tableroActual[0][0][0][0]) {
-            if (solucionUnica) {
-                if (tableroCompleto(tableroActual, tableroResultado, setContando)) {
-                    setCompletado(true);
-                }
+            if (tableroCompleto(tableroActual, tableroResultado, setContando)) {
+                setCompletado(true);
             }
         }
     }, [tableroActual]);
 
     // Creamos un nuevo tablero
     function handleNuevo(e) {
-
-        const nuevoTableroResuldado = generarTableroResultado();
-        const nuevoTableroInicial = generarTableroInicial(structuredClone(nuevoTableroResuldado), dificultad);
         // Primero generamos el tablero de resultado valido
-        setTableroResultado(structuredClone(nuevoTableroResuldado));
+        const nuevoTableroResuldado = generarTableroResultado();
         // Despues eliminamos algunos numeros para generar el tablero inicial
+        const nuevoTableroInicial = generarTableroInicial(structuredClone(nuevoTableroResuldado), dificultad);
+        // Cargamos a las variables de trabajo
         setTableroInicial(structuredClone(nuevoTableroInicial));
-        // Copiamos el tablero inicial en el tablero de trabajo
         setTableroActual(structuredClone(nuevoTableroInicial));
+        // Se resetea el teclado
+        resetTeclado(nuevoTableroInicial, setTeclado);
+        // Cargamos los valores en las variables de trabajo
+        setTableroResultado(structuredClone(nuevoTableroResuldado));
+        // Seteamos las variables a valores de inicio
         setBoxSeleccionado({
             filaBloqueIndex: 3,
             colBloqueIndex: 0,
@@ -63,13 +62,9 @@ function Controles({ tema, setTema, setDark, setCompletado }) {
                 )
             )
         ));
-        
-        const soloUnaSolucion = unaSolucion(nuevoTableroInicial, dificultad);
-        setSolucionUnica(soloUnaSolucion);
-        
-        // Por ultimo se resetea el teclado
-        resetTeclado(nuevoTableroInicial, setTeclado);
+        // Se ajusta la variable de completado a falso
         setCompletado(false);
+        // Se inicia el cronometro
         setTiempo(0);
         setContando(true);
     } 
@@ -145,18 +140,14 @@ function Controles({ tema, setTema, setDark, setCompletado }) {
                             onChange={handleChange}
                             onClick={handleSliderClick}
                             step="1" />
-                        <div className='solucion-unica'>
-                            <span>Solucion unica:</span>&nbsp;
-                            <span className={solucionUnica ? 'visible' : 'oculto'}>SI</span>
-                            <span className={solucionUnica ? 'oculto' : 'visible'}>NO</span>
-                        </div>
                     </div>
                 </div>
-                <div className='contenedor-tema'>
-                   <button onMouseDown={handleTema} >{`Tema ${tema}`}</button>
+                <div className='contenedor-otros'>
+                    <div className='contenedor-tema'>
+                        <button onMouseDown={handleTema} >{`Tema ${tema}`}</button>
+                    </div>
                 </div>
             </div>
-
         </>
     )
 }

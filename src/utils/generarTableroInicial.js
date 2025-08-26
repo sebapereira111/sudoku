@@ -61,14 +61,21 @@ function unaSolucion(tablero, dificultad) {
     return (cantidadDeSoluciones > 1) ? false : true
 }
 
-//Recibe un tablero y dificultad deseada, retorna un tablero con celdas eliminadas de acuerdo a la dificultad elegida
+// Recibe un tablero y dificultad deseada, retorna un tablero con celdas eliminadas de acuerdo a la dificultad elegida
+// El tablero retornado tiene solucion unica
 function generarTableroInicial(tablero, dificultad) {
     
     // Primero creamos una nueva matriz para no modificar lo recibido
     const tableroInicial = structuredClone(tablero);
+    // La dificultad que vamos logrando en nuestro tablero
+    let dificultadActual = 0;
+
+    // Para limitar el tiempo de ejecucion
+    const tiempoMaximoMs = 10000; // tiempo límite en milisegundos
+    const inicio = performance.now();
 
     // Despues vamos a ir eliminando valores en funcion de la dificultad deseada
-    for (let index = 0; index < dificultad; index++) {
+    for (let index = 0; index < 1000; index++) {
         // eliminarNumero es la posicion que vamos a borrar
         const eliminarNumero = {}
         
@@ -80,11 +87,35 @@ function generarTableroInicial(tablero, dificultad) {
             eliminarNumero.colBoxIndex = Math.floor(Math.random() * 3);
         } while ((tableroInicial[eliminarNumero.filaBloqueIndex][eliminarNumero.colBloqueIndex][eliminarNumero.filaBoxIndex][eliminarNumero.colBoxIndex] == 0));
         
+        // Guardamos el numero elegido en una variable temporal
+        const tempEliminado = tableroInicial[eliminarNumero.filaBloqueIndex][eliminarNumero.colBloqueIndex][eliminarNumero.filaBoxIndex][eliminarNumero.colBoxIndex];
         // Borramos el numero elegido
         tableroInicial[eliminarNumero.filaBloqueIndex][eliminarNumero.colBloqueIndex][eliminarNumero.filaBoxIndex][eliminarNumero.colBoxIndex] = 0;
-
+        // Aumentamos la dificultad actual
+        dificultadActual++;
+        // Comprobamos si tenemos solucion unica
+        if (!unaSolucion(tableroInicial, dificultadActual)) {
+            // Si no tenemos solucion unica
+            // Devolvemos el valor que habiamos eliminado
+            tableroInicial[eliminarNumero.filaBloqueIndex][eliminarNumero.colBloqueIndex][eliminarNumero.filaBoxIndex][eliminarNumero.colBoxIndex] = tempEliminado;
+            // Y reducimos la dificultad alcanzada
+            dificultadActual--; 
+        }
+        // Revisamos las condiciones de salida
+        // Vemos si ya llegamos a la dificultad deseada
+        if (dificultadActual == dificultad) {
+            const tiempo = performance.now()-inicio
+            console.log(dificultadActual, dificultad, tiempo, index)
+            break;
+        }
+        // Vemos si ya llegamos al tiempo maximo de ejecucion
+        if ((performance.now() - inicio) > tiempoMaximoMs) {
+            const tiempo = performance.now()-inicio
+            console.log(dificultadActual, dificultad, tiempo, index)
+            break
+        }
     }
-
+    
     // Retornamos el tablero para jugar
     return tableroInicial
 }
