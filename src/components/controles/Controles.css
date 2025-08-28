@@ -102,3 +102,33 @@
     font-size: 1rem;
     color: var(--text);
 }
+
+.creando-tablero {
+    pointer-events: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(31, 173, 163, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    span {
+        color: rgb(0, 0, 0);
+    }
+}
+
+.creando-oculto {
+    display: none;
+}
+
+.creando-texto-principal {
+    font-size: 4rem;
+}
+
+.creando-texto-secundario {
+    font-size: 2rem;
+}

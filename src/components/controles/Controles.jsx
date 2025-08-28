@@ -3,10 +3,14 @@ import { inputChange, resetTeclado, tableroCompleto } from '../../utils/inputCha
 import { generarTableroResultado } from '../../utils/generarTableroResultado';
 import { generarTableroInicial } from '../../utils/generarTableroInicial';
 import { useTableroContext, useControlesContext } from '../../context/TableroProvider';
-import { useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { Cronometro } from './Cronometro/Cronometro';
 
 function Controles({ tema, setTema, setDark, completado, setCompletado }) {
+    // Variable que avisa que se solicito un nuevo tablero
+    const [crearNuevoTablero, setCrearNuevoTablero] = useState(false);
+    const [eliminarClics, setEliminarClics] = useState(false);
+
     // Importamos las variables de contexto
     const {
         tableroResultado,
@@ -26,8 +30,13 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
         dificultad
     } = useControlesContext();
 
+    // Para el cronometro cuando se completa el tablero
+    // Se ejecuta cada vez que hay un ambio en tablero actual
     useEffect(() => {
+        // Pregunta si hay algo en el box 0-0-0-0 (para discriminar si el tablero esta vacio, podia
+        // haber sido otro box)
         if (tableroActual[0][0][0][0]) {
+            // Pregunta si el tablero actual es igual al tablero resultado
             if (tableroCompleto(tableroActual, tableroResultado, setContando)) {
                 setCompletado(true);
             }
@@ -35,51 +44,77 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
     }, [tableroActual]);
 
     // Creamos un nuevo tablero
+    useEffect(() => {
+        if (crearNuevoTablero) {
+            setTimeout(() => {
+                            // Primero generamos el tablero de resultado valido
+                const nuevoTableroResuldado = generarTableroResultado();
+                // Despues eliminamos algunos numeros para generar el tablero inicial
+                const nuevoTableroInicial = generarTableroInicial(structuredClone(nuevoTableroResuldado), dificultad);
+                // Cargamos a las variables de trabajo
+                setTableroInicial(structuredClone(nuevoTableroInicial));
+                setTableroActual(structuredClone(nuevoTableroInicial));
+                // Se resetea el teclado
+                resetTeclado(nuevoTableroInicial, setTeclado);
+                // Cargamos los valores en las variables de trabajo
+                setTableroResultado(structuredClone(nuevoTableroResuldado));
+                // Seteamos las variables a valores de inicio
+                setBoxSeleccionado({
+                    filaBloqueIndex: 3,
+                    colBloqueIndex: 0,
+                    filaBoxIndex: 0,
+                    colBoxIndex: 0
+                });
+                setApuntesActivados(false);
+                setApuntes(Array.from({ length: 3 }, () =>
+                    Array.from({ length: 3 }, () => 
+                        Array.from({ length: 3 }, () => 
+                            Array.from({ length: 3 }, () => Array(9).fill(0))
+                        )
+                    )
+                ));
+                // Se ajusta la variable de completado a falso
+                setCompletado(false);
+                // Se inicia el cronometro
+                setTiempo(0);
+                setContando(true);
+                setEliminarClics(true);
+            }, 100);
+        }
+    }, [crearNuevoTablero]);
+
+    // timeout para "borrar" la cola de clics
+    // Durante la creacion del tablero se muestra un mensaje
+    // Si se hace clic por ese mensaje, los clics quedan en cola y se ejecutan cuando desaparece como 
+    // un clic en algo detras. El timeout es para dejar un momento mas ese mensaje (0.1 s) y que 
+    // "absorva" los clics y no pasen a lo que esta detras
+    useEffect(() => {
+        if (eliminarClics) {
+            setTimeout(() => {
+                setCrearNuevoTablero(false)
+                setEliminarClics(false)
+            }, 100);
+        }
+    }, [eliminarClics])
+
     function handleNuevo(e) {
-        // Primero generamos el tablero de resultado valido
-        const nuevoTableroResuldado = generarTableroResultado();
-        // Despues eliminamos algunos numeros para generar el tablero inicial
-        const nuevoTableroInicial = generarTableroInicial(structuredClone(nuevoTableroResuldado), dificultad);
-        // Cargamos a las variables de trabajo
-        setTableroInicial(structuredClone(nuevoTableroInicial));
-        setTableroActual(structuredClone(nuevoTableroInicial));
-        // Se resetea el teclado
-        resetTeclado(nuevoTableroInicial, setTeclado);
-        // Cargamos los valores en las variables de trabajo
-        setTableroResultado(structuredClone(nuevoTableroResuldado));
-        // Seteamos las variables a valores de inicio
-        setBoxSeleccionado({
-            filaBloqueIndex: 3,
-            colBloqueIndex: 0,
-            filaBoxIndex: 0,
-            colBoxIndex: 0
-        });
-        setApuntesActivados(false);
-        setApuntes(Array.from({ length: 3 }, () =>
-            Array.from({ length: 3 }, () => 
-                Array.from({ length: 3 }, () => 
-                    Array.from({ length: 3 }, () => Array(9).fill(0))
-                )
-            )
-        ));
-        // Se ajusta la variable de completado a falso
-        setCompletado(false);
-        // Se inicia el cronometro
-        setTiempo(0);
-        setContando(true);
+        setCrearNuevoTablero(true);
     } 
 
+    // Modificacion del slider
     function handleSliderClick(e) {
         const elementoEnFoco = document.getElementById(boxSeleccionado.filaBloqueIndex+'-'+boxSeleccionado.colBloqueIndex+'-'+boxSeleccionado.filaBoxIndex+'-'+boxSeleccionado.colBoxIndex);
         elementoEnFoco.focus();
     }
 
+    // Llama la funcion que se encarga de los input
     function handleChange(e) {
         e.stopPropagation();
         e.preventDefault();
         inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, setTableroActual, apuntesActivados, setApuntesActivados, tableroActual, apuntes, setApuntes, setDificultad, teclado, setTeclado, setTiempo, setContando);
     }
 
+    // modifica el tema
     function handleTema(e) {
         e.stopPropagation();
         e.preventDefault();
@@ -104,6 +139,10 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
 
     return (
         <>
+            <div className={crearNuevoTablero ? 'creando-tablero' : 'creando-tablero creando-oculto'} >
+                <span className='creando-texto-principal' >Creando tablero</span>
+                <span className='creando-texto-secundario' >espere un momento...</span>
+            </div>
             <div className='contenedor-controles'>
                 <div className='contenedor-controles-juego'>
                     <div className='contenedor-utilidades'>
