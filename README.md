@@ -4,7 +4,7 @@
 
 - Modo oscuro/claro. ✅ (se puede mejorar)
 - Mostrar/elegir si el tablero es unico. ✅ (Siempre unico / Tope de 10s para crear)
-- Bloqueo de pantalla mientras genera nuevo juego. 
+- Bloqueo de pantalla mientras genera nuevo juego. ✅
 - Mejorar y ordenar logica de controles. Separar en funciones. ✅
 - Mostrar Reglas. 
 - Mostrar tiempo de juego. ✅
