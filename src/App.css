@@ -58,3 +58,9 @@
     --fn: rgba(33, 173, 164, 0.5);
 }
 
+/* Responsive design (en ingles porque no hay ñ) */
+@media only screen and (max-width: 500px) {
+    html {
+        font-size: calc(100vw/32);
+    }
+}
