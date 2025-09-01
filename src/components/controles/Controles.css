@@ -76,6 +76,11 @@
     width: 100%;
 }
 
+.indicador-dificultad {
+    display: flex;
+    justify-content: center;
+}
+
 .visible {
     display: inline-block;
 }

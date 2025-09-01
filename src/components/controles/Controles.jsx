@@ -179,6 +179,9 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
                             onChange={handleChange}
                             onClick={handleSliderClick}
                             step="1" />
+                            <div className='indicador-dificultad'>
+                                <span>{(dificultad < 40) ? 'FACIL' : ((dificultad < 50) ? 'MEDIO' : 'DIFICIL')}</span>
+                            </div>
                     </div>
                 </div>
                 <div className='contenedor-otros'>
