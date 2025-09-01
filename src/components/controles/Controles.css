@@ -117,6 +117,19 @@
     color: var(--text);
 }
 
+.contenedor-puntajes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-puntajes button {
+    height: 2rem;
+    font-size: 1rem;
+    color: var(--text);
+}
+
 .creando-tablero {
     pointer-events: auto;
     position: fixed;

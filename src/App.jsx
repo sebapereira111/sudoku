@@ -55,12 +55,6 @@ function App() {
     // Mensaje cuando se completa un tablero unico
     // La varible cambia a true cuando se completa el teclado (en Controles)
     const [completado, setCompletado] = useState(false);
-    useEffect(() => {
-        // El efecto solo se ejecuta cuando cambia completado, y el mensaje se muestra solo cuando es true
-        if (completado) {
-            alert("Tablero completado. Felicidades!");
-        }
-    }, [completado]);
 
     return (
         <>

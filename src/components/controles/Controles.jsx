@@ -3,18 +3,20 @@ import { inputChange, resetTeclado, tableroCompleto } from '../../utils/inputCha
 import { generarTableroResultado } from '../../utils/generarTableroResultado';
 import { generarTableroInicial } from '../../utils/generarTableroInicial';
 import { useTableroContext, useControlesContext } from '../../context/TableroProvider';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Cronometro } from './Cronometro/Cronometro';
 import IconReiniciar from '../../assets/images/reiniciar.svg?react';
 import IconBorrar from '../../assets/images/borrar.svg?react';
 import IconAnotaciones from '../../assets/images/anotaciones.svg?react';
 import IconNuevo from '../../assets/images/nuevo.svg?react';
+import MejoresTiempos from './MejoresTiempos/MejoresTiempos'
 
 
 function Controles({ tema, setTema, setDark, completado, setCompletado }) {
     // Variable que avisa que se solicito un nuevo tablero
     const [crearNuevoTablero, setCrearNuevoTablero] = useState(false);
     const [eliminarClics, setEliminarClics] = useState(false);
+    const [dificultadTablero, setDificultadTablero] = useState(0);
 
     // Importamos las variables de contexto
     const {
@@ -52,7 +54,9 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
     useEffect(() => {
         if (crearNuevoTablero) {
             setTimeout(() => {
-                            // Primero generamos el tablero de resultado valido
+                // Guardamos el valor de dificultad
+                setDificultadTablero(dificultad);
+                // Primero generamos el tablero de resultado valido
                 const nuevoTableroResuldado = generarTableroResultado();
                 // Despues eliminamos algunos numeros para generar el tablero inicial
                 const nuevoTableroInicial = generarTableroInicial(structuredClone(nuevoTableroResuldado), dificultad);
@@ -143,12 +147,24 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
         }
     }
 
+    // Para mostrar los mejores tiempos
+    const [mostrarTiempos, setMostrarTiempos] = useState(false);
+
+    function handleMejoresPuntajes(e) {
+        if (mostrarTiempos == false) {
+            setMostrarTiempos(true);
+        } else {
+            setMostrarTiempos(false);
+        }
+    }
+
     return (
         <>
             <div className={crearNuevoTablero ? 'creando-tablero' : 'creando-tablero creando-oculto'} >
                 <span className='creando-texto-principal' >Creando tablero</span>
                 <span className='creando-texto-secundario' >espere un momento...</span>
             </div>
+            {mostrarTiempos && <MejoresTiempos setMostrarTiempos={setMostrarTiempos} />}
             <div className='contenedor-controles'>
                 <div className='contenedor-controles-juego'>
                     <div className='contenedor-utilidades'>
@@ -157,7 +173,7 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
                         <button title='Apuntes' id='apuntes' className={apuntesActivados ? 'boton-utilidades apuntes-activados' : 'boton-utilidades' } onMouseDown={handleChange} ><IconAnotaciones className='iconos' /></button>    
                     </div>
                     <div className='contenedor-teclado-y-cronometro'>
-                        <Cronometro completado={completado} />
+                        <Cronometro completado={completado} dificultadTablero={dificultadTablero}/>
                         <div className='contenedor-teclado'>
                             {/* Genera un array de 9 elementos button para el teclado */}
                             {teclado.map((numero, index) => <button key={1 + index} id={1 + index} title={`Numero ${1 + index}`} className='boton-teclado' onMouseDown={handleChange}>{numero ? numero : " "}</button>)}
@@ -179,7 +195,7 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
                             type="range"
                             id="dificultad"
                             name="dificultad"
-                            min="30"
+                            min="1"
                             max="60"
                             value={dificultad}
                             onChange={handleChange}
@@ -193,6 +209,9 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
                 <div className='contenedor-otros'>
                     <div className='contenedor-tema'>
                         <button onMouseDown={handleTema} >{`Tema ${tema}`}</button>
+                    </div>
+                    <div className='contenedor-puntajes'>
+                        <button onMouseDown={handleMejoresPuntajes} >Mejores Tiempos</button>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,51 @@
+.contenedor-mejores-tiempos {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(31, 173, 163, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-ubicacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-dificultad {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-tiempos {
+    /* Se crea un grid 5x4 para mostrar los mejores tiempos de cada categoria */    
+    display: grid;
+    grid-template-columns: 2rem 5rem 7rem;
+    justify-items: center;
+    grid-template-rows: repeat(5, auto);
+    row-gap: 0.5rem;
+}
+
+.titulo {
+    font-size: 3rem;
+    font-weight: bolder;
+    margin-bottom: 2rem;
+}
+
+.sub-titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.texto {
+    font-size: 1.5rem;
+}

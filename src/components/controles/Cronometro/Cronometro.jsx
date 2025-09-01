@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react'
 import { useTableroContext } from '../../../context/TableroProvider';
 import './Cronometro.css'
+import { guardarTiempo } from '../../../utils/guardarTiempo';
 
-function Cronometro({ completado }) {
+function Cronometro({ completado, dificultadTablero }) {
     // importamos las variables de contexto que vamos a usar
     // tiempo se incrementa cada 1 segundo para llevar la cuenta
     // contando es una flag que solo avisa si esta funcionando el contador
@@ -27,7 +28,20 @@ function Cronometro({ completado }) {
                 clearInterval(intervalo.current);
             }
         }
-    }, [contando])
+    }, [contando]);
+
+    let nombre;
+    useEffect(() => {
+        // El efecto solo se ejecuta cuando cambia completado, y el mensaje se muestra solo cuando es true
+        if (completado) {
+            alert('Tablero completado. Felicidades! ');
+            nombre = prompt("Introduzca su nombre (se guardan solo las primeras 3 letras)");
+            if (nombre) {
+                nombre = nombre.substring(0,3).toUpperCase();
+                guardarTiempo(nombre, tiempo, dificultadTablero);
+            }
+        }
+    }, [completado]);
 
     function visibilidadContador(setContando, tiempo) {
         if (document.hidden) {
