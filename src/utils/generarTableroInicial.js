@@ -105,13 +105,13 @@ function generarTableroInicial(tablero, dificultad) {
         // Vemos si ya llegamos a la dificultad deseada
         if (dificultadActual == dificultad) {
             const tiempo = performance.now()-inicio
-            console.log(dificultadActual, dificultad, tiempo, index)
+            //console.log(dificultadActual, dificultad, tiempo, index)
             break;
         }
         // Vemos si ya llegamos al tiempo maximo de ejecucion
         if ((performance.now() - inicio) > tiempoMaximoMs) {
             const tiempo = performance.now()-inicio
-            console.log(dificultadActual, dificultad, tiempo, index)
+            //console.log(dificultadActual, dificultad, tiempo, index)
             break
         }
     }
