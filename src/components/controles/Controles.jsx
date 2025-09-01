@@ -195,7 +195,7 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
                             type="range"
                             id="dificultad"
                             name="dificultad"
-                            min="1"
+                            min="30"
                             max="60"
                             value={dificultad}
                             onChange={handleChange}
