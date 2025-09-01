@@ -3,8 +3,13 @@ import { inputChange, resetTeclado, tableroCompleto } from '../../utils/inputCha
 import { generarTableroResultado } from '../../utils/generarTableroResultado';
 import { generarTableroInicial } from '../../utils/generarTableroInicial';
 import { useTableroContext, useControlesContext } from '../../context/TableroProvider';
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Cronometro } from './Cronometro/Cronometro';
+import IconReiniciar from '../../assets/images/reiniciar.svg?react';
+import IconBorrar from '../../assets/images/borrar.svg?react';
+import IconAnotaciones from '../../assets/images/anotaciones.svg?react';
+import IconNuevo from '../../assets/images/nuevo.svg?react';
+
 
 function Controles({ tema, setTema, setDark, completado, setCompletado }) {
     // Variable que avisa que se solicito un nuevo tablero
@@ -97,6 +102,7 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
         }
     }, [eliminarClics])
 
+    // Gestiona pulsacion de crear nuevo tablero y llama a funcion correspondiente
     function handleNuevo(e) {
         setCrearNuevoTablero(true);
     } 
@@ -146,9 +152,9 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
             <div className='contenedor-controles'>
                 <div className='contenedor-controles-juego'>
                     <div className='contenedor-utilidades'>
-                        <button title='Reiniciar juego' id='reset' className='boton-utilidades' onMouseDown={handleChange}>↻</button>
-                        <button title='Borrar celda' id='borrar' className='boton-utilidades' onMouseDown={handleChange}>↩</button>
-                        <button title='Apuntes' id='apuntes' className={apuntesActivados ? 'boton-utilidades apuntes-activados' : 'boton-utilidades' } onMouseDown={handleChange} >✎</button>    
+                        <button title='Reiniciar juego' id='reset' className='boton-utilidades' onMouseDown={handleChange}><IconReiniciar className='iconos' /></button>
+                        <button title='Borrar celda' id='borrar' className='boton-utilidades' onMouseDown={handleChange}><IconBorrar className='iconos' /></button>
+                        <button title='Apuntes' id='apuntes' className={apuntesActivados ? 'boton-utilidades apuntes-activados' : 'boton-utilidades' } onMouseDown={handleChange} ><IconAnotaciones className='iconos' /></button>    
                     </div>
                     <div className='contenedor-teclado-y-cronometro'>
                         <Cronometro completado={completado} />
@@ -160,7 +166,7 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
                 </div>
                 <div className='contenedor-nuevo-juego'>
                     <div className='contenedor-boton-nuevo-juego' >
-                        <button title='Nuevo juego' id='nuevo' className='boton-utilidades' onMouseDown={handleNuevo}>▶︎</button>
+                        <button title='Nuevo juego' id='nuevo' className='boton-utilidades' onMouseDown={handleNuevo}><IconNuevo className='iconos' /></button>
                     </div>
                     <div className='contenedor-slider-dificultad'>
                         <div className='etiquetas-slider-dificultad'>
