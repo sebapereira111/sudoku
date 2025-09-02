@@ -30,7 +30,8 @@
 .iconos {
     height: 80%;
     width: 80%;
-    fill: var(--text)
+    fill: var(--text);
+    pointer-events: none;
 }
 
 .apuntes-activados {
