@@ -109,12 +109,6 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
     // Gestiona pulsacion de crear nuevo tablero y llama a funcion correspondiente
     function handleNuevo(e) {
         setCrearNuevoTablero(true);
-    } 
-
-    // Modificacion del slider
-    function handleSliderClick(e) {
-        const elementoEnFoco = document.getElementById(boxSeleccionado.filaBloqueIndex+'-'+boxSeleccionado.colBloqueIndex+'-'+boxSeleccionado.filaBoxIndex+'-'+boxSeleccionado.colBoxIndex);
-        elementoEnFoco.focus();
     }
 
     // Llama la funcion que se encarga de los input
@@ -199,7 +193,6 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
                             max="60"
                             value={dificultad}
                             onChange={handleChange}
-                            onClick={handleSliderClick}
                             step="1" />
                             <div className='indicador-dificultad'>
                                 <span>{(dificultad < 40) ? 'FACIL' : ((dificultad < 50) ? 'MEDIO' : 'DIFICIL')}</span>
