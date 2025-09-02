@@ -105,27 +105,14 @@
     justify-content: space-evenly;
 }
 
-.contenedor-tema {
+.contenedor-otros-boton {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.contenedor-tema button {
-    height: 2rem;
-    font-size: 1rem;
-    color: var(--text);
-}
-
-.contenedor-puntajes {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.contenedor-puntajes button {
+.contenedor-otros-boton button {
     height: 2rem;
     font-size: 1rem;
     color: var(--text);

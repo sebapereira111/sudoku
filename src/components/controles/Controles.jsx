@@ -10,6 +10,7 @@ import IconBorrar from '../../assets/images/borrar.svg?react';
 import IconAnotaciones from '../../assets/images/anotaciones.svg?react';
 import IconNuevo from '../../assets/images/nuevo.svg?react';
 import MejoresTiempos from './MejoresTiempos/MejoresTiempos'
+import InstruccionesDeJuego from './InstruccionesDeJuego/InstruccionesDeJuego';
 
 
 function Controles({ tema, setTema, setDark, completado, setCompletado }) {
@@ -152,6 +153,17 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
         }
     }
 
+    // Para mostrar las instrucciones de juego
+    const [mostrarInstrucciones, setMostrarInstrucciones] = useState(false);
+
+    function handleInstrucciones(e) {
+        if (mostrarInstrucciones == false) {
+            setMostrarInstrucciones(true);
+        } else {
+            setMostrarInstrucciones(false);
+        }
+    }    
+
     return (
         <>
             <div className={crearNuevoTablero ? 'creando-tablero' : 'creando-tablero creando-oculto'} >
@@ -159,6 +171,7 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
                 <span className='creando-texto-secundario' >espere un momento...</span>
             </div>
             {mostrarTiempos && <MejoresTiempos setMostrarTiempos={setMostrarTiempos} />}
+            {mostrarInstrucciones && <InstruccionesDeJuego setMostrarInstrucciones={setMostrarInstrucciones} />}
             <div className='contenedor-controles'>
                 <div className='contenedor-controles-juego'>
                     <div className='contenedor-utilidades'>
@@ -200,11 +213,14 @@ function Controles({ tema, setTema, setDark, completado, setCompletado }) {
                     </div>
                 </div>
                 <div className='contenedor-otros'>
-                    <div className='contenedor-tema'>
+                    <div className='contenedor-otros-boton'>
                         <button onMouseDown={handleTema} >{`Tema ${tema}`}</button>
                     </div>
-                    <div className='contenedor-puntajes'>
+                    <div className='contenedor-otros-boton'>
                         <button onMouseDown={handleMejoresPuntajes} >Mejores Tiempos</button>
+                    </div>
+                    <div className='contenedor-otros-boton'>
+                        <button onMouseDown={handleInstrucciones} >Instrucciones</button>
                     </div>
                 </div>
             </div>

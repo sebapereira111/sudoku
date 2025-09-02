@@ -1,0 +1,42 @@
+.contenedor-instrucciones {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: rgba(31, 173, 163, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Fuente */
+    font-family: monospace;
+
+}
+
+.contenedor-texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    
+}
+
+.titulo {
+    font-size: 2rem;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+}
+
+.sub-titulo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+.texto {
+    font-size: 1rem;
+    align-self: baseline;
+}
