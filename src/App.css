@@ -32,13 +32,13 @@
     /* Color texto azul */
     --text-azul: rgb(125, 150, 255);
     /* Fondo seleccionado */
-    --fs: rgb(15, 200, 200);
+    --fs: rgb(5, 200, 200);
     /* Fondo invalido */
     --fi: rgb(148, 51, 51);
     /* Fondo bloque, fila y columna correspondiente al seleccionado */
     --fbfc: rgb(175, 200, 200);
     /* Fondo numero igual al seleccionado */
-    --fn: rgba(105, 200, 200);
+    --fn: rgba(95, 200, 200);
 }
 
 .light {
