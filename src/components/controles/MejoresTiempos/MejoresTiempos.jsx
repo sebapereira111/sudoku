@@ -31,20 +31,32 @@ function MejoresTiempos({ setMostrarTiempos }) {
                 <div className='contenedor-ubicacion' >
                     <div className='contenedor-dificultad' >
                         <h2 className='sub-titulo'>Facil</h2>
-                        <div className='contenedor-tiempos'>
-                            {arrayLocalFacil.map((element, index) => <span className='texto' key={index}>{element}</span>)}
+                        <div className='contenedor-lista'>
+                            <div className="linea-vertical"></div>
+                            <div className='contenedor-tiempos'>
+                                {arrayLocalFacil.map((element, index) => <span className='texto' key={index}>{element}</span>)}
+                            </div>
+                            <div className="linea-vertical"></div>
                         </div>
                     </div>
                     <div className='contenedor-dificultad' >
                         <h2 className='sub-titulo'>Medio</h2>
-                        <div className='contenedor-tiempos'>
-                            {arrayLocalMedio.map((element, index) => <span className='texto' key={index}>{element}</span>)}
+                        <div className='contenedor-lista'>
+                            <div className="linea-vertical"></div>
+                            <div className='contenedor-tiempos'>
+                                {arrayLocalMedio.map((element, index) => <span className='texto' key={index}>{element}</span>)}
+                            </div>
+                            <div className="linea-vertical"></div>
                         </div>
                     </div>
                     <div className='contenedor-dificultad' >
                         <h2 className='sub-titulo'>Dificil</h2>
-                        <div className='contenedor-tiempos'>
-                            {arrayLocalDificil.map((element, index) => <span className='texto' key={index}>{element}</span>)}
+                        <div className='contenedor-lista'>
+                            <div className="linea-vertical"></div>
+                            <div className='contenedor-tiempos'>
+                                {arrayLocalDificil.map((element, index) => <span className='texto' key={index}>{element}</span>)}
+                            </div>
+                            <div className="linea-vertical"></div>
                         </div>
                     </div>
                 </div>

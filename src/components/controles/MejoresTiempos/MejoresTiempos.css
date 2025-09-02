@@ -10,12 +10,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* Fuente */
+    font-family: monospace;
 }
 
 .contenedor-ubicacion {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .contenedor-dificultad {
@@ -23,6 +26,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.contenedor-lista {
+    display: flex;
+}
+
+.linea-vertical {
+    width: 2px;
+    height: 10rem;
+    background-color: white;
+    align-self:flex-end;
 }
 
 .contenedor-tiempos {
@@ -44,6 +58,7 @@
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    margin-top: 2rem;
 }
 
 .texto {

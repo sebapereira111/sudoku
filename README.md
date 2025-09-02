@@ -9,11 +9,12 @@
 - Mostrar Reglas. 
 - Mostrar tiempo de juego. ✅
 - Ordenar/agrupar variables/props. ✅
-- Comentar codigo. 
+- Comentar codigo.
 - Cuando se completa un numero desaparece del teclado. ✅
 - Desaparecer apunte al cargar valor en la misma fila/bloque ?
 - Detectar cuando se completa el tablero ✅
 - Responsividad para tablet/celular
+- Mejores tiempos locales ✅
 
 Los pendientes no estan en orden de prioridad
 
