@@ -26,19 +26,19 @@
 
 .dark {
     /* Color fondo */
-    --bg: rgba(0, 0, 0, 0.85);
+    --bg: rgb(45, 45, 45);
     /* Color texto */
-    --text: wheat;
+    --text: rgb(225, 255, 255);
     /* Color texto azul */
-    --text-azul: white;
+    --text-azul: rgb(125, 150, 255);
     /* Fondo seleccionado */
-    --fs: rgb(56, 85, 83);
+    --fs: rgb(15, 200, 200);
     /* Fondo invalido */
-    --fi: rgb(211, 55, 55);
+    --fi: rgb(148, 51, 51);
     /* Fondo bloque, fila y columna correspondiente al seleccionado */
-    --fbfc: rgba(56, 85, 83, 0.7);
+    --fbfc: rgb(175, 200, 200);
     /* Fondo numero igual al seleccionado */
-    --fn: rgba(56, 85, 83, 0.9);
+    --fn: rgba(105, 200, 200);
 }
 
 .light {
@@ -47,7 +47,7 @@
     /* Color texto */
     --text: black;
     /* Color texto azul */
-    --text-azul: rgb(83, 83, 223);
+    --text-azul: rgb(32, 32, 234);
     /* Fondo seleccionado */
     --fs: rgba(31, 173, 163, 1);
     /* Fondo invalido */
