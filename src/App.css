@@ -26,19 +26,23 @@
 
 .dark {
     /* Color fondo */
-    --bg: rgb(45, 45, 45);
+    --bg: #303030;
     /* Color texto */
-    --text: rgb(225, 255, 255);
+    --text: #E1FFFF;
     /* Color texto azul */
-    --text-azul: rgb(125, 150, 255);
+    --text-azul: #3991e9;
     /* Fondo seleccionado */
-    --fs: rgb(5, 200, 200);
+    --fs: #06302D;
     /* Fondo invalido */
     --fi: rgb(148, 51, 51);
     /* Fondo bloque, fila y columna correspondiente al seleccionado */
-    --fbfc: rgb(175, 200, 200);
+    --fbfc: #0D6862;
     /* Fondo numero igual al seleccionado */
-    --fn: rgba(95, 200, 200);
+    --fn: #129189;
+    /* Botones */
+    --botones: rgba(31, 173, 163, 0.25);
+    /* Botones seleccionados */
+    --botones-seleccionados: rgba(31, 173, 163, 0.75);
 }
 
 .light {
@@ -47,15 +51,19 @@
     /* Color texto */
     --text: black;
     /* Color texto azul */
-    --text-azul: rgb(32, 32, 234);
+    --text-azul: rgb(0, 0, 255);
     /* Fondo seleccionado */
-    --fs: rgba(31, 173, 163, 1);
+    --fs: #9FE9E4;
     /* Fondo invalido */
     --fi: rgba(255, 0, 0, 0.369);
     /* Fondo bloque, fila y columna correspondiente al seleccionado */
-    --fbfc: rgba(31, 173, 163, 0.25);
+    --fbfc: #55D8D0;
     /* Fondo numero igual al seleccionado */
-    --fn: rgba(33, 173, 164, 0.5);
+    --fn: #27AAA2;
+    /* Botones */
+    --botones: rgba(31, 173, 163, 0.25);
+    /* Botones seleccionados */
+    --botones-seleccionados: rgba(31, 173, 163, 0.75);
 }
 
 /* Responsive design (en ingles porque no hay ñ) */

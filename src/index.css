@@ -38,7 +38,7 @@ button {
     /* Otros */
     cursor: pointer;
     
-    background-color: rgba(31, 173, 163, 0.25);
+    background-color: var(--botones);
 }
 
 button:hover {
@@ -46,5 +46,5 @@ button:hover {
 }
 
 button:active {
-    background-color: rgba(31, 173, 163, 0.75);
+    background-color: var(--botones-seleccionados);
 }
