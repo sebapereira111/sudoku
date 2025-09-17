@@ -32,17 +32,17 @@
     /* Color texto azul */
     --text-azul: #3991e9;
     /* Fondo seleccionado */
-    --fs: #06302D;
+    --fs: #394F4D;
     /* Fondo invalido */
     --fi: rgb(148, 51, 51);
     /* Fondo bloque, fila y columna correspondiente al seleccionado */
-    --fbfc: #0D6862;
+    --fbfc: #587976;
     /* Fondo numero igual al seleccionado */
-    --fn: #129189;
+    --fn: #86A7A4;
     /* Botones */
-    --botones: rgba(31, 173, 163, 0.25);
+    --botones: #394F4D;
     /* Botones seleccionados */
-    --botones-seleccionados: rgba(31, 173, 163, 0.75);
+    --botones-seleccionados: #86A7A4;
 }
 
 .light {
@@ -53,17 +53,17 @@
     /* Color texto azul */
     --text-azul: rgb(0, 0, 255);
     /* Fondo seleccionado */
-    --fs: #9FE9E4;
+    --fs: #D4EAE8;
     /* Fondo invalido */
     --fi: rgba(255, 0, 0, 0.369);
     /* Fondo bloque, fila y columna correspondiente al seleccionado */
-    --fbfc: #55D8D0;
+    --fbfc: #A8D5D1;
     /* Fondo numero igual al seleccionado */
-    --fn: #27AAA2;
+    --fn: #7EC0BA;
     /* Botones */
-    --botones: rgba(31, 173, 163, 0.25);
+    --botones: #D4EAE8;
     /* Botones seleccionados */
-    --botones-seleccionados: rgba(31, 173, 163, 0.75);
+    --botones-seleccionados: #7EC0BA;
 }
 
 /* Responsive design (en ingles porque no hay ñ) */
