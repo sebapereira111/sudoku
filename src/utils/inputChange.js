@@ -105,18 +105,21 @@ function habilitarTecla(teclado, setTeclado, valor) {
 
 // Funcion que borra el box seleccionado
 function borrarBox(boxSeleccionado, setTableroActual, setApuntes, teclado, setTeclado, valor) {
-    // Se borran los apuntes
-    setApuntes((prev) => {
-        const newArr = structuredClone(prev);
-        newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-        return newArr;
-    });
+    // Se borran los apuntes solo si no hay un numero ya puesto ahi
+    if (!valor) {
+        setApuntes((prev) => {
+            const newArr = structuredClone(prev);
+            newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+            return newArr;
+        });
+    }
     // Se borra el valor del box
     setTableroActual((prev => {
         const newArr = structuredClone(prev);
         newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = 0;
         return newArr
     }));
+    // Se vuelve a habilitar la tecla
     habilitarTecla(teclado, setTeclado, valor)
 }
 
