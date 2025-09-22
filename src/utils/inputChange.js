@@ -158,14 +158,35 @@ function borrarTecla(input, tableroActual, teclado, setTeclado, boxSeleccionado,
     setTeclado(tecladoTemporal);
 }
 
-// Actualiza el valor del tablero
-function actualizarTablero(boxSeleccionado, setTableroActual, tableroActual, teclado, setTeclado, valor, input) {
+// Se borran los apuntes del mismo bloque, fila y columna si son iguales a valor
+function borrarApuntes(boxSeleccionado, input, setApuntes) {
+    setApuntes((prev) => {
+        const newArr = structuredClone(prev);
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                // Se borran los numeros:
+                // Bloque
+                newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][i][j][input - 1] = 0;
+                // Fila
+                newArr[boxSeleccionado.filaBloqueIndex][i][boxSeleccionado.filaBoxIndex][j][input - 1] = 0;
+                // Columna
+                newArr[i][boxSeleccionado.colBloqueIndex][j][boxSeleccionado.colBoxIndex][input - 1] = 0;
+            }
+        }
+        return newArr;
+    });
+}
+
+// Actualiza el numero del tablero
+function actualizarTablero(boxSeleccionado, setTableroActual, tableroActual, teclado, setTeclado, valor, input, setApuntes) {
     setTableroActual((prev => {
         const newArr = structuredClone(prev);
         newArr[boxSeleccionado.filaBloqueIndex][boxSeleccionado.colBloqueIndex][boxSeleccionado.filaBoxIndex][boxSeleccionado.colBoxIndex] = input;
         return newArr
     }));
     borrarTecla(input, tableroActual, teclado, setTeclado, boxSeleccionado, valor);
+    // Borramos el numero en los apuntes (cuando es igaul a input) del mismo bloque, fila y columna
+    borrarApuntes(boxSeleccionado, input, setApuntes);
 }
 
 // Compara el tablero resultado con el tablero actual
@@ -283,7 +304,7 @@ function inputChange(e, tableroInicial, boxSeleccionado, setBoxSeleccionado, set
                     if (teclado[input-1]) {
                         // Si esta activada la tecla se actualiza el tablero
                         // Tambien se actualiza el teclado desde actualizar tablero
-                        actualizarTablero(boxSeleccionado, setTableroActual, tableroActual, teclado, setTeclado, valor, input);
+                        actualizarTablero(boxSeleccionado, setTableroActual, tableroActual, teclado, setTeclado, valor, input, setApuntes);
                     }
                 }
                 return
